@@ -2,7 +2,7 @@
   <div class="flex flex-row items-center space-x-4 w-full">
     <input
       type="text"
-      placeholder="All Eyes On Me - Bo Burnham"
+      :placeholder="placeHolder"
       class="input input-bordered w-full text-base-content"
       v-model="searchTerm"
       @keyup.enter="lookUp(searchTerm)"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeMount } from 'vue'
+import { ref, onMounted, onBeforeMount, onBeforeUnmount } from 'vue'
 import { Icon } from '@iconify/vue'
 import router from '../router'
 
@@ -33,6 +33,28 @@ export default {
   setup() {
     const sm = useSearchManager()
     const dm = useDownloadManager()
+
+    const placeHolderOptions = [
+      "All Eyes On Me - Bo Burnham",
+      "https://open.spotify.com/track/4vfN00PlILRXy5dcXHQE9M?si=e4d9e7c044dd4a8f",
+      "Lil Wayne",
+      "Drive - Miley Cyrus",
+      "Sofia - TMG",
+      "Lightning Crashes - Live"
+    ]
+
+    const placeHolder = ref(placeHolderOptions[0])
+
+
+    const polling = setInterval(() => {
+      // Loop placeHolder value through placeHolderOptions by moving 0th index to end every 6 seconds
+			placeHolderOptions.push(placeHolderOptions.shift())
+      placeHolder.value = placeHolderOptions[0]
+		}, 6000)
+
+    onBeforeUnmount(() => {
+      clearInterval(polling)
+    });
 
     function lookUp(query) {
       if (sm.isValidURL(query)) {
@@ -47,7 +69,7 @@ export default {
     function goto(dest) {
       router.push(dest)
     }
-    return { lookUp, searchTerm: sm.searchTerm, isValidURL: sm.isValidURL }
+    return { lookUp, searchTerm: sm.searchTerm, isValidURL: sm.isValidURL, placeHolder }
   },
 }
 </script>

@@ -36,12 +36,6 @@ export default {
   setup() {
     const themeMgr = useBinaryThemeManager()
 
-    console.log('get theme', themeMgr.currentTheme.value)
-    // onBeforeMount(() => {
-    //   themeMgr.setLightAlias('emerald')
-    //   themeMgr.setDarkAlias('forest')
-    // })
-
     return { themeMgr }
   },
 }

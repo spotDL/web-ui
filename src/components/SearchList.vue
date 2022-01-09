@@ -1,9 +1,8 @@
 <template>
   <div class="min-h-screen m-2">
-    <!-- {{ $route.params.query }} -->
     <div v-if="loading || error" class="hero min-h-screen">
       <button v-if="loading" class="btn btn-sm btn-ghost loading">
-        loading
+        LOADING
       </button>
       <div v-if="error" class="alert alert-error">
         <div class="flex-1">
@@ -48,7 +47,7 @@
         <h2 class="card-title">
           {{ song.name }} - {{ song.artist }}
           <div class="badge mx-0.5 badge-error" v-if="song.explicit">
-            explicit
+            Explicit
           </div>
         </h2>
         <h3>
@@ -63,12 +62,7 @@
         <br />
 
         <p>
-          <!-- <div class="badge mx-0.5" v-for="genre in song.genres" :key="genre">
-            {{ genre }}
-          </div> -->
           <br />
-
-          <!-- {{ song }} -->
         </p>
         <div class="card-actions absolute bottom-0 right-0 m-2">
           <a class="btn btn-ghost btn-square" :href="song.url" target="_blank">
@@ -99,8 +93,6 @@
 
 <script>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import API from '/src/model/api'
 import { Icon } from '@iconify/vue'
 
 import { useSearchManager } from '../model/search'
@@ -110,10 +102,7 @@ export default {
   components: {
     Icon,
   },
-  props: {
-    data: Object,
-    error: Boolean,
-  },
+  props: ['data', 'error'],
   emits: ['download'],
   setup(props, context) {
     const sm = useSearchManager()

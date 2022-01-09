@@ -1,16 +1,16 @@
 import { ref, computed } from 'vue'
 
-const currentTheme = ref('light')
+const currentTheme = ref('')
+
+const lightAlias = ref('light')
+const darkAlias = ref('dark')
 
 function useBinaryThemeManager(
   useSystem = true,
-  initialTheme = 'dark',
+  initialTheme = '',
   newLightAlias,
   newDarkAlias
 ) {
-  const lightAlias = ref('light')
-  const darkAlias = ref('dark')
-
   function setLightAlias(alias) {
     lightAlias.value = alias
     _updateDocument()
@@ -47,10 +47,15 @@ function useBinaryThemeManager(
     )
   }
 
-  currentTheme.value = initialTheme
+  if (currentTheme.value !== 'light' && currentTheme.value !== 'dark') {
+    if (useSystem) setTheme(getSystemTheme())
+    if (initialTheme === 'light' || initialTheme === 'dark') {
+      currentTheme.value = initialTheme
+    }
+  }
   if (newLightAlias) setLightAlias(newLightAlias)
   if (newDarkAlias) setDarkAlias(newDarkAlias)
-  if (useSystem) setTheme(getSystemTheme())
+
   _updateDocument()
 
   return {

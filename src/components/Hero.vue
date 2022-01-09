@@ -5,7 +5,7 @@
         type="checkbox"
         class="toggle m-5"
         @change="themeMgr.setTheme($event.target.checked ? 'light' : 'dark')"
-        :checked="themeMgr.currentTheme === 'dark' ? false : 'checked'"
+        :checked="themeMgr.currentTheme.value === 'dark' ? false : 'checked'"
       />
     </div>
     <div class="block text-center justify-center hero-content">
@@ -35,10 +35,12 @@ export default {
   components: { Icon, SearchInput },
   setup() {
     const themeMgr = useBinaryThemeManager()
-    onBeforeMount(() => {
-      themeMgr.setLightAlias('emerald')
-      themeMgr.setDarkAlias('forest')
-    })
+
+    console.log('get theme', themeMgr.currentTheme.value)
+    // onBeforeMount(() => {
+    //   themeMgr.setLightAlias('emerald')
+    //   themeMgr.setDarkAlias('forest')
+    // })
 
     return { themeMgr }
   },

@@ -17,13 +17,13 @@ export default {
   },
   download(songURL, sessionID) {
     return API.post(
-      '/api/downloader/download/url?url=' + songURL + '&sessionID=' + sessionID
+      '/api/download/url?url=' + songURL + '&sessionID=' + sessionID
     )
   },
   downloadFileURL(fileName, sessionID) {
     return (
       API.defaults.baseURL +
-      '/api/downloader/download/file?file=' +
+      '/api/download/file?file=' +
       fileName +
       '&sessionID=' +
       sessionID

@@ -40,7 +40,7 @@
       <figure class="aspect-square md:max-h-fit">
         <img
           :src="song.cover_url"
-          class="object-contain aspect-square md:max-h-40"
+          class="object-contain aspect-square md:max-h-44"
         />
       </figure>
       <div class="card-body">
@@ -71,7 +71,10 @@
             <Icon icon="clarity:link-line" class="h-6 w-6" />
           </a>
 
-          <button v-if="dm.inQueue(song)" class="btn btn-primary btn-square">
+          <button
+            v-if="pt.getBySong(song)?.isQueued()"
+            class="btn btn-primary btn-square"
+          >
             <!-- in queue -->
             &#8203;
             <Icon icon="clarity:check-line" class="h-6 w-6" />
@@ -96,7 +99,7 @@ import { ref, onMounted } from 'vue'
 import { Icon } from '@iconify/vue'
 
 import { useSearchManager } from '../model/search'
-import { useDownloadManager } from '../model/download'
+import { useProgressTracker, useDownloadManager } from '../model/download'
 
 export default {
   components: {
@@ -106,6 +109,7 @@ export default {
   emits: ['download'],
   setup(props, context) {
     const sm = useSearchManager()
+    const pt = useProgressTracker()
     const dm = useDownloadManager()
 
     return {
@@ -115,6 +119,7 @@ export default {
       loading: sm.isSearching,
       download: (data) => context.emit('download', data),
       dm,
+      pt,
     }
   },
 }

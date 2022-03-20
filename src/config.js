@@ -1,7 +1,9 @@
 const config = {
-  BACKEND: 'http://localhost:8800',
-  PORT: '',
-  baseURL: '',
+  PROTOCOL: 'http',
+  WS_PROTOCOL: 'ws',
+  BACKEND: 'localhost',
+  PORT: '8800',
+  BASEURL: '',
 }
 
 export default config

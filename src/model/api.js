@@ -2,31 +2,61 @@
 import axios from 'axios' // used to connect to server backend in ./server folder
 import config from '/src/config.js'
 
-console.log('using config', config)
+import { v4 as uuidv4 } from 'uuid'
+
+console.log('using env:', process.env)
+console.log('using config: ', config)
 
 const API = axios.create({
-  baseURL: process.env.BACKEND || config.BACKEND,
+  baseURL: `${process.env.PROTOCOL || config.PROTOCOL}://${
+    process.env.BACKEND || config.BACKEND
+  }:${process.env.PORT || config.PORT}${process.env.BASEURL || config.BASEURL}`,
 })
 
+const sessionID = uuidv4()
+console.log('session ID: ', sessionID)
+
+const wsConnection = new WebSocket(
+  `${process.env.WS_PROTOCOL || config.WS_PROTOCOL}://${
+    process.env.BACKEND || config.BACKEND
+  }:${process.env.PORT || config.PORT}${
+    process.env.BASEURL || config.BASEURL
+  }/api/ws?client_id=${sessionID}`
+)
+
+function search(query) {
+  return API.get('/api/songs/search', { params: { query } })
+}
+function open(songURL) {
+  return API.get('/api/song/url', { params: { url: songURL } })
+}
+function download(songURL) {
+  return API.post('/api/download/url', null, {
+    params: { url: songURL, client_id: sessionID },
+  })
+}
+function downloadFileURL(fileName) {
+  return (
+    API.defaults.baseURL +
+    '/api/download/file?file=' +
+    fileName +
+    '&client_id=' +
+    sessionID
+  )
+}
+
+function ws_onmessage(fn) {
+  return (wsConnection.onmessage = fn)
+}
+function ws_onerror(fn) {
+  return (wsConnection.onerror = fn)
+}
+
 export default {
-  search(query) {
-    return API.get('/api/songs/search?query=' + query)
-  },
-  open(songURL) {
-    return API.get('api/song/url?url=' + songURL)
-  },
-  download(songURL, sessionID) {
-    return API.post(
-      '/api/download/url?url=' + songURL + '&sessionID=' + sessionID
-    )
-  },
-  downloadFileURL(fileName, sessionID) {
-    return (
-      API.defaults.baseURL +
-      '/api/download/file?file=' +
-      fileName +
-      '&sessionID=' +
-      sessionID
-    )
-  },
+  search,
+  open,
+  download,
+  downloadFileURL,
+  ws_onmessage,
+  ws_onerror,
 }

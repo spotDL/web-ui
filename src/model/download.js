@@ -1,24 +1,103 @@
 import { ref, computed } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
 
 import API from '/src/model/api'
 
-const sessionID = uuidv4()
+const STATUS = {
+  QUEUED: 'In Queue',
+  DOWNLOADING: 'Downloading...',
+  DOWNLOADED: 'Done',
+  ERROR: 'Error',
+}
+
 const downloadQueue = ref([])
 
-function useDownloadManager() {
-  function queue(song, beginDownload = true) {
-    downloadQueue.value.push(song)
-    if (beginDownload) download(song)
+class DownloadItem {
+  constructor(song) {
+    this.song = song
+    this.web_status = STATUS.QUEUED
+    this.progress = 0
+    this.message = null
+    this.web_download_url = null
+  }
+  setDownloading() {
+    this.web_status = STATUS.DOWNLOADING
+  }
+  setDownloaded() {
+    this.web_status = STATUS.DOWNLOADED
+  }
+  setError() {
+    this.web_status = STATUS.ERROR
+  }
+  setWebURL(URL) {
+    this.web_download_url = URL
+  }
+  isQueued() {
+    return this.song.song_id !== undefined ? true : false
+    // return this.web_status === STATUS.QUEUED
+  }
+  isDownloading() {
+    return this.web_status === STATUS.DOWNLOADING
+  }
+  isDownloaded() {
+    return this.web_status === STATUS.DOWNLOADED
+  }
+  isErrored() {
+    return this.web_status === STATUS.ERROR
+  }
+  wsUpdate(message) {
+    this.progress = message.progress
+    this.message = message.message
+  }
+}
+
+function useProgressTracker() {
+  function _findIndex(song) {
+    return downloadQueue.value.findIndex(
+      (downloadItem) => downloadItem.song.song_id === song.song_id
+    )
+  }
+  function appendSong(song) {
+    let downloadItem = new DownloadItem(song)
+    downloadQueue.value.push(downloadItem)
+  }
+  function removeSong(song) {
+    console.log('removing', song, song.song_id)
+    downloadQueue.value = downloadQueue.value.filter(
+      (downloadItem) => downloadItem.song.song_id !== song.song_id
+    )
+    console.log(downloadQueue.value)
   }
 
+  function getBySong(song) {
+    return downloadQueue.value[_findIndex(song)]
+  }
+
+  return {
+    appendSong,
+    removeSong,
+    getBySong,
+    downloadQueue,
+  }
+}
+
+const progressTracker = useProgressTracker()
+
+API.ws_onmessage((event) => {
+  // event: MessageEvent
+  let data = JSON.parse(event.data)
+  // console.log('websocket message:', data)
+  progressTracker.getBySong(data.song).wsUpdate(data)
+})
+
+function useDownloadManager() {
   function fromURL(url) {
     API.open(url)
       .then((res) => {
         console.log('Received Response:', res)
         if (res.status === 200) {
-          console.log('Opened Song:', res.data)
-          queue(res.data)
+          let song = res.data
+          console.log('Opened Song:', song)
+          queue(song)
         } else {
           console.log('Error:', res)
         }
@@ -26,107 +105,47 @@ function useDownloadManager() {
       .catch((err) => {
         console.log('Other Error:', err.message)
       })
-  }
-
-  function remove(song) {
-    downloadQueue.value = downloadQueue.value.filter(
-      (_song) => _song.song_id !== song.song_id
-    )
-  }
-
-  function queueLength() {
-    return downloadQueue.value.length
-  }
-
-  function downloadedLength() {
-    return downloadQueue.value.filter((song) => {
-      return song.web_status === 'downloaded'
-    }).length
-  }
-
-  function downloadedProgress() {
-    if (downloadedLength() === 0 || queueLength() === 0) return 0
-    return (downloadedLength() / queueLength()) * 100
-  }
-
-  function inQueue(song) {
-    return downloadQueue.value.find(
-      (_song) => _song.song_id === song.song_id
-    ) !== undefined
-      ? true
-      : false
   }
 
   function download(song) {
-    _setDownloading(song)
-    API.download(song.url, sessionID)
+    console.log('Downloading', song)
+    progressTracker.getBySong(song).setDownloading()
+    API.download(song.url)
       .then((res) => {
         console.log('Received Response:', res)
         if (res.status === 200) {
-          console.log('Download Complete:', res.data)
-          _setWebURL(song, API.downloadFileURL(res.data, sessionID))
-          _setDownloaded(song)
+          let filename = res.data
+          console.log('Download Complete:', filename)
+          progressTracker
+            .getBySong(song)
+            .setWebURL(API.downloadFileURL(filename))
+          progressTracker.getBySong(song).setDownloaded()
         } else {
           console.log('Error:', res)
-          _setError(song)
+          progressTracker.getBySong(song).setError()
         }
       })
       .catch((err) => {
         console.log('Other Error:', err.message)
+        progressTracker.getBySong(song).setError()
       })
   }
 
-  function downloadAll() {
-    downloadQueue.value.forEach((song, index, array) => {
-      download(song)
-    })
+  function queue(song, beginDownload = true) {
+    progressTracker.appendSong(song)
+    if (beginDownload) download(song)
   }
-
-  function isDownloaded(song) {
-    return downloadQueue.value[_songIndex(song)].web_status === 'downloaded'
-  }
-  function isDownloading(song) {
-    return downloadQueue.value[_songIndex(song)].web_status === 'downloading'
-  }
-
-  function status(song) {
-    // API.status(sessionID, )
-    return downloadQueue.value[_songIndex(song)].web_status
-  }
-
-  function _songIndex(song) {
-    return downloadQueue.value.findIndex(
-      (_song) => _song.song_id === song.song_id
-    )
-  }
-  function _setWebURL(song, URL) {
-    downloadQueue.value[_songIndex(song)].web_download_url = URL
-  }
-  function _setDownloading(song) {
-    downloadQueue.value[_songIndex(song)].web_status = 'downloading'
-  }
-  function _setDownloaded(song) {
-    downloadQueue.value[_songIndex(song)].web_status = 'downloaded'
-  }
-  function _setError(song) {
-    downloadQueue.value[_songIndex(song)].web_status = 'error'
+  function remove(song) {
+    console.log('removing')
+    progressTracker.removeSong(song)
   }
 
   return {
-    downloadQueue,
-    queue,
     fromURL,
-    queueLength,
-    downloadedLength,
-    downloadedProgress,
-    remove,
     download,
-    downloadAll,
-    inQueue,
-    status,
-    isDownloaded,
-    isDownloading,
+    queue,
+    remove,
   }
 }
 
-export { useDownloadManager }
+export { useDownloadManager, useProgressTracker }

@@ -3,10 +3,14 @@
     <div v-if="true" class="flex justify-end absolute top-0 right-0">
       <input
         type="checkbox"
-        class="toggle m-5"
+        class="toggle my-5 mx-2"
         @change="themeMgr.setTheme($event.target.checked ? 'light' : 'dark')"
         :checked="themeMgr.currentTheme.value === 'dark' ? false : 'checked'"
       />
+      <label for="my-modal" class="btn btn-square modal-button m-2">
+        &#8203;
+        <Icon icon="clarity:settings-line" class="h-6 w-6" />
+      </label>
     </div>
     <div class="block text-center justify-center hero-content">
       <div class="bg-cover bg-no-repeat bg-center">

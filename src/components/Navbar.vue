@@ -14,6 +14,26 @@
       <SearchInput class="w-full" />
     </div>
     <div class="navbar-end">
+      <!-- <button class="btn btn-square px-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button> -->
+      <label for="my-modal" class="btn btn-square modal-button mx-2">
+        &#8203;
+        <Icon icon="clarity:settings-line" class="h-6 w-6" />
+      </label>
       <div class="indicator">
         <div
           v-if="pt.downloadQueue.value.length > 0"

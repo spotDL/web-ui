@@ -35,26 +35,25 @@ export default {
     const dm = useDownloadManager()
 
     const placeHolderOptions = [
-      "All Eyes On Me - Bo Burnham",
-      "https://open.spotify.com/track/4vfN00PlILRXy5dcXHQE9M?si=e4d9e7c044dd4a8f",
-      "Lil Wayne",
-      "Drive - Miley Cyrus",
-      "Sofia - TMG",
-      "Lightning Crashes - Live"
+      'All Eyes On Me - Bo Burnham',
+      'https://open.spotify.com/track/4vfN00PlILRXy5dcXHQE9M?si=e4d9e7c044dd4a8f',
+      'Lil Wayne',
+      'Drive - Miley Cyrus',
+      'Sofia - TMG',
+      'Lightning Crashes - Live',
     ]
 
     const placeHolder = ref(placeHolderOptions[0])
 
-
     const polling = setInterval(() => {
       // Loop placeHolder value through placeHolderOptions by moving 0th index to end every 6 seconds
-			placeHolderOptions.push(placeHolderOptions.shift())
+      placeHolderOptions.push(placeHolderOptions.shift())
       placeHolder.value = placeHolderOptions[0]
-		}, 6000)
+    }, 6000)
 
     onBeforeUnmount(() => {
       clearInterval(polling)
-    });
+    })
 
     function lookUp(query) {
       if (sm.isValidURL(query)) {
@@ -69,7 +68,12 @@ export default {
     function goto(dest) {
       router.push(dest)
     }
-    return { lookUp, searchTerm: sm.searchTerm, isValidURL: sm.isValidURL, placeHolder }
+    return {
+      lookUp,
+      searchTerm: sm.searchTerm,
+      isValidURL: sm.isValidURL,
+      placeHolder,
+    }
   },
 }
 </script>

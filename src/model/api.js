@@ -45,6 +45,13 @@ function downloadFileURL(fileName) {
   )
 }
 
+function getSettings() {
+  return API.get('/api/settings')
+}
+function setSettings(settings) {
+  return API.post('/api/settings/update', settings, null)
+}
+
 function ws_onmessage(fn) {
   return (wsConnection.onmessage = fn)
 }
@@ -57,6 +64,8 @@ export default {
   open,
   download,
   downloadFileURL,
+  getSettings,
+  setSettings,
   ws_onmessage,
   ws_onerror,
 }

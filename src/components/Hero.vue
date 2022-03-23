@@ -60,7 +60,10 @@ import { useBinaryThemeManager } from '../model/theme'
 export default {
   components: { Icon, SearchInput },
   setup() {
-    const themeMgr = useBinaryThemeManager()
+    const themeMgr = useBinaryThemeManager({
+      newLightAlias: 'spotdl-light',
+      newDarkAlias: 'spotdl-dark',
+    })
 
     return { themeMgr }
   },

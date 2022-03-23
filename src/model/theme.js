@@ -5,12 +5,12 @@ const currentTheme = ref('')
 const lightAlias = ref('light')
 const darkAlias = ref('dark')
 
-function useBinaryThemeManager(
+function useBinaryThemeManager({
   useSystem = true,
   initialTheme = '',
-  newLightAlias,
-  newDarkAlias
-) {
+  newLightAlias = null,
+  newDarkAlias = null,
+} = {}) {
   function setLightAlias(alias) {
     lightAlias.value = alias
     _updateDocument()

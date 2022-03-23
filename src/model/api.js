@@ -49,7 +49,7 @@ function getSettings() {
   return API.get('/api/settings')
 }
 function setSettings(settings) {
-  return API.post('/api/settings/update', settings, null)
+  return API.post('/api/settings/update', settings)
 }
 
 function ws_onmessage(fn) {

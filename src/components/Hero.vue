@@ -1,12 +1,34 @@
 <template>
   <div class="hero min-h-screen">
     <div v-if="true" class="flex justify-end absolute top-0 right-0">
-      <input
+      <!-- <input
         type="checkbox"
         class="toggle my-5 mx-2"
         @change="themeMgr.setTheme($event.target.checked ? 'light' : 'dark')"
         :checked="themeMgr.currentTheme.value === 'dark' ? false : 'checked'"
-      />
+      /> -->
+      <label class="swap swap-rotate">
+        <!-- this hidden checkbox controls the state -->
+        <input
+          type="checkbox"
+          @change="themeMgr.setTheme($event.target.checked ? 'light' : 'dark')"
+          :checked="themeMgr.currentTheme.value === 'dark' ? false : 'checked'"
+        />
+
+        <!-- sun icon -->
+        &#8203;
+        <Icon
+          icon="clarity:sun-line"
+          class="swap-on fill-current h-8 w-8 m-4"
+        />
+
+        <!-- moon icon -->
+        &#8203;
+        <Icon
+          icon="clarity:moon-line"
+          class="swap-off fill-current h-8 w-8 m-4"
+        />
+      </label>
       <label for="my-modal" class="btn btn-square modal-button m-2">
         &#8203;
         <Icon icon="clarity:settings-line" class="h-6 w-6" />

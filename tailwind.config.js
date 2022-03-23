@@ -15,6 +15,7 @@ module.exports = {
         'spotdl-dark': {
           // ...require('daisyui/src/colors/themes')['[data-theme=forest]'],
           primary: '#22d662', // spotdl green
+          'primary-content': '#ffffff', // font color on primary
           secondary: '#ffffff', // unused?
           accent: '#ffffff', // unused
           neutral: '#4c4c4c', // navbar & footer
@@ -31,6 +32,7 @@ module.exports = {
       {
         'spotdl-light': {
           primary: '#22d662',
+          'primary-content': '#ffffff',
           secondary: '#5d5d5d',
           accent: '#16ce57',
           neutral: '#4c4c4c',

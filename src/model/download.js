@@ -88,6 +88,10 @@ API.ws_onmessage((event) => {
   // console.log('websocket message:', data)
   progressTracker.getBySong(data.song).wsUpdate(data)
 })
+API.ws_onerror((event) => {
+  // event: MessageEvent
+  console.log('websocket error:', event)
+})
 
 function useDownloadManager() {
   function fromURL(url) {

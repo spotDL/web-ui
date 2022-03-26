@@ -19,10 +19,12 @@ console.log('session ID: ', sessionID)
 const wsConnection = new WebSocket(
   `${process.env.WS_PROTOCOL || config.WS_PROTOCOL}://${
     process.env.BACKEND || config.BACKEND
-  }:${process.env.PORT || config.PORT}${
-    process.env.BASEURL || config.BASEURL
-  }/api/ws?client_id=${sessionID}`
+  }${process.env.BASEURL || config.BASEURL}/api/ws?client_id=${sessionID}`
 )
+
+wsConnection.onopen = (event) => {
+  log('websocket connection opened', event)
+}
 
 function search(query) {
   return API.get('/api/songs/search', { params: { query } })

@@ -15,7 +15,9 @@ const sessionID = uuidv4()
 console.log('session ID: ', sessionID)
 
 const wsConnection = new WebSocket(
-  `${config.WS_PROTOCOL}://${config.BACKEND}${config.BASEURL}/api/ws?client_id=${sessionID}`
+  `${config.WS_PROTOCOL}://${config.BACKEND}${
+    config.PORT !== '' ? ':' + config.PORT : ''
+  }${config.BASEURL}/api/ws?client_id=${sessionID}`
 )
 
 wsConnection.onopen = (event) => {

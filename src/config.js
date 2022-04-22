@@ -3,6 +3,7 @@ const config = {
   WS_PROTOCOL: process.env.WS_PROTOCOL || 'ws',
   BACKEND: process.env.BACKEND || 'localhost',
   PORT: process.env.PORT || '8800',
+  WS_PORT: process.env.WS_PORT || '8800',
   BASEURL: process.env.BASEURL || '',
 }
 

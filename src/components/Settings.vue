@@ -8,7 +8,6 @@
       >
       <h3 class="font-bold text-lg">Download Settings</h3>
       <div class="flex flex-col justify-center my-4">
-        <!-- {{ sm.settings.value }} -->
         <!-- audio_provider -->
         <div class="form-control w-full">
           <label class="label">

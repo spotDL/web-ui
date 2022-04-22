@@ -12,7 +12,6 @@ const settingsOptions = {
 }
 
 API.getSettings().then((res) => {
-  // console.log('Received settings response:', res)
   if (res.status === 200) {
     console.log('Received settings:', res.data)
     settings.value = res.data
@@ -20,8 +19,6 @@ API.getSettings().then((res) => {
     console.log('Error loading settings')
   }
 })
-
-// console.log('Download Settings', settings.value)
 
 function useSettingsManager() {
   const isSaved = ref()

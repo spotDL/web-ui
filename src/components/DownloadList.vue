@@ -51,6 +51,7 @@
             >
               error
             </div>
+            <!-- // If Websocket connection exists, set status using descriptive events (message), else, fallback to simple statuses. -->
             <span class="badge">{{
               downloadItem.message || downloadItem.web_status
             }}</span>

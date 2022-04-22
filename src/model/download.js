@@ -82,10 +82,10 @@ function useProgressTracker() {
 
 const progressTracker = useProgressTracker()
 
+// If Websocket connection exists, set status using descriptive events, else, fallback to simple messages.
 API.ws_onmessage((event) => {
   // event: MessageEvent
   let data = JSON.parse(event.data)
-  // console.log('websocket message:', data)
   progressTracker.getBySong(data.song).wsUpdate(data)
 })
 API.ws_onerror((event) => {

@@ -16,12 +16,12 @@
           </label>
           <select
             class="select w-full"
-            v-model="sm.settings.value.audio_provider"
+            v-model="sm.settings.value.audio_providers[0]"
           >
             <option
-              v-for="(provider, index) in sm.settingsOptions.audio_provider"
+              v-for="(provider, index) in sm.settingsOptions.audio_providers"
               :key="index"
-              :selected="provider === sm.settings.value.audio_provider"
+              :selected="provider === sm.settings.value.audio_providers?.[0]"
             >
               {{ provider }}
             </option>
@@ -34,12 +34,12 @@
           </label>
           <select
             class="select w-full"
-            v-model="sm.settings.value.lyrics_provider"
+            v-model="sm.settings.value.lyrics_providers[0]"
           >
             <option
-              v-for="(provider, index) in sm.settingsOptions.lyrics_provider"
+              v-for="(provider, index) in sm.settingsOptions.lyrics_providers"
               :key="index"
-              :selected="provider === sm.settings.value.lyrics_provider"
+              :selected="provider === sm.settings.value.lyrics_providers?.[0]"
             >
               {{ provider }}
             </option>

@@ -86,9 +86,9 @@
                 text-primary-content
                 border-4 border-primary
               "
-              :style="`--value: ${downloadItem.progress * 100}; --size: 2.5rem`"
+              :style="`--value: ${downloadItem.progress}; --size: 2.5rem`"
             >
-              {{ Math.round(downloadItem.progress * 100) }}%
+              {{ Math.round(downloadItem.progress) }}%
             </div>
           </div>
         </div>

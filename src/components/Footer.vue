@@ -7,7 +7,7 @@
         height="50"
         viewBox="0 0 24 24"
       />
-      <p>spotdl<br />Open Source Music Downloader</p>
+      <p>spotDL<br />Open Source Music Downloader</p>
     </div>
     <div>
       <span class="footer-title">Social</span>

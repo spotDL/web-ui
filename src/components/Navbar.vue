@@ -8,7 +8,7 @@
       <div class="bg-cover bg-no-repeat bg-center">
         <img src="../assets/spotdl.svg" class="py-2 pr-2 w-10 center" />
       </div>
-      <button class="text-lg font-bold">spotdl</button>
+      <button class="text-lg font-bold">spotDL</button>
     </button>
     <div class="hidden sm:flex px-2 mx-2 navbar-center w-96 space-x-4">
       <SearchInput class="w-full" />
@@ -37,10 +37,7 @@
       <div class="indicator">
         <div
           v-if="pt.downloadQueue.value.length > 0"
-          class="
-            indicator-item indicator-top indicator-end
-            badge badge-secondary
-          "
+          class="indicator-item indicator-top indicator-end badge badge-secondary"
           style="top: -5px; right: -5px"
         >
           {{ pt.downloadQueue.value.length }}

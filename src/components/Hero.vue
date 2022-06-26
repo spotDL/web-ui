@@ -39,7 +39,7 @@
         <img src="../assets/spotdl.svg" class="mb-5 w-32 center" />
       </div>
       <div class="max-w-lg">
-        <h1 class="mb-5 text-5xl font-bold text-base-content">spotdl</h1>
+        <h1 class="mb-5 text-5xl font-bold text-base-content">spotDL</h1>
         <p class="mb-5 text-base-content">
           Download any song and never have to worry about metadata.
         </p>

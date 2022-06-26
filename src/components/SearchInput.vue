@@ -62,6 +62,8 @@ export default {
       } else if (sm.isValidSearch(query)) {
         let dest = { name: 'Search', params: { query: query } }
         if (sm.isValidSearch(query)) goto(dest)
+      } else {
+        console.log('Invalid search term.')
       }
     }
 

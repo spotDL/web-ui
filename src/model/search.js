@@ -13,7 +13,13 @@ function useSearchManager() {
     return isValidSearch(str) || isValidURL(str)
   }
   function isValidSearch(str) {
-    if (str === '') {
+    if (
+      str === '' ||
+      str.includes('://open.spotify.com/playlist/') ||
+      str.includes('://open.spotify.com/album/') ||
+      str.includes('://open.spotify.com/show/') ||
+      str.includes('://open.spotify.com/artist/')
+    ) {
       return false
     }
     return true

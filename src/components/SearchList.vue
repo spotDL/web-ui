@@ -27,15 +27,7 @@
       v-else
       v-for="(song, index) in data"
       :key="index"
-      class="
-        card
-        md:card-side
-        card-bordered
-        my-2
-        shadow-lg
-        card-compact
-        bg-base-100
-      "
+      class="card md:card-side card-bordered my-2 shadow-lg card-compact bg-base-100"
     >
       <figure class="aspect-square md:max-h-fit">
         <img
@@ -45,7 +37,7 @@
       </figure>
       <div class="card-body">
         <h2 class="card-title">
-          {{ song.name }} - {{ song.artist }}
+          {{ song.name }}
           <div class="badge mx-0.5 badge-error" v-if="song.explicit">
             Explicit
           </div>

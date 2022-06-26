@@ -41,7 +41,7 @@
       <div class="max-w-lg">
         <h1 class="mb-5 text-5xl font-bold text-base-content">spotDL</h1>
         <p class="mb-5 text-base-content">
-          Download any song and never have to worry about metadata.
+          Download your Spotify songs with embedded album art and metadata
         </p>
       </div>
 

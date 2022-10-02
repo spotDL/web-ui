@@ -39,9 +39,9 @@ function downloadFileURL(fileName) {
   return (
     API.defaults.baseURL +
     '/api/download/file?file=' +
-    fileName +
+    encodeURIComponent(fileName) +
     '&client_id=' +
-    sessionID
+    encodeURIComponent(sessionID)
   )
 }
 

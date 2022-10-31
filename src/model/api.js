@@ -8,14 +8,14 @@ console.log('using env:', process.env)
 console.log('using config: ', config)
 
 const API = axios.create({
-  baseURL: `${config.PROTOCOL}://${config.BACKEND}:${config.PORT}${config.BASEURL}`,
+  baseURL: `${config.PROTOCOL}//${config.BACKEND}:${config.PORT}${config.BASEURL}`,
 })
 
 const sessionID = uuidv4()
 console.log('session ID: ', sessionID)
 
 const wsConnection = new WebSocket(
-  `${config.WS_PROTOCOL}://${config.BACKEND}${
+  `${config.WS_PROTOCOL}//${config.BACKEND}${
     config.PORT !== '' ? ':' + config.PORT : ''
   }${config.BASEURL}/api/ws?client_id=${sessionID}`
 )

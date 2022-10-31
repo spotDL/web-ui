@@ -1,9 +1,9 @@
 const config = {
-  PROTOCOL: process.env.PROTOCOL || 'http',
-  WS_PROTOCOL: process.env.WS_PROTOCOL || 'ws',
-  BACKEND: process.env.BACKEND || 'localhost',
-  PORT: process.env.PORT || '8800',
-  WS_PORT: process.env.WS_PORT || '8800',
+  PROTOCOL: process.env.PROTOCOL || window.location.protocol,
+  WS_PROTOCOL: process.env.WS_PROTOCOL || 'ws:',
+  BACKEND: process.env.BACKEND || window.location.hostname,
+  PORT: process.env.PORT || window.location.port,
+  WS_PORT: process.env.WS_PORT || window.location.port,
   BASEURL: process.env.BASEURL || '',
 }
 

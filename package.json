@@ -1,6 +1,6 @@
 {
-  "name": "my-vue-app",
-  "version": "0.0.0",
+  "name": "spotdl-web",
+  "version": "4.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

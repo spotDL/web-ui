@@ -46,10 +46,12 @@ function downloadFileURL(fileName) {
 }
 
 function getSettings() {
-  return API.get('/api/settings')
+  return API.get('/api/settings', { params: { client_id: sessionID } })
 }
 function setSettings(settings) {
-  return API.post('/api/settings/update', settings)
+  return API.post('/api/settings/update', settings, {
+    params: { client_id: sessionID },
+  })
 }
 
 function ws_onmessage(fn) {

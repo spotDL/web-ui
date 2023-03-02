@@ -27,14 +27,21 @@ wsConnection.onopen = (event) => {
 function search(query) {
   return API.get('/api/songs/search', { params: { query } })
 }
+
 function open(songURL) {
   return API.get('/api/song/url', { params: { url: songURL } })
 }
+
 function download(songURL) {
   return API.post('/api/download/url', null, {
     params: { url: songURL, client_id: sessionID },
   })
 }
+
+function check_for_update() {
+  return API.get('/api/check_update')
+}
+
 function downloadFileURL(fileName) {
   return (
     API.defaults.baseURL +
@@ -46,10 +53,12 @@ function downloadFileURL(fileName) {
 }
 
 function getSettings() {
-  return API.get('/api/settings')
+  return API.get('/api/settings', { params: { client_id: sessionID } })
 }
 function setSettings(settings) {
-  return API.post('/api/settings/update', settings)
+  return API.post('/api/settings/update', settings, {
+    params: { client_id: sessionID },
+  })
 }
 
 function ws_onmessage(fn) {
@@ -66,6 +75,7 @@ export default {
   downloadFileURL,
   getSettings,
   setSettings,
+  check_for_update,
   ws_onmessage,
   ws_onerror,
 }

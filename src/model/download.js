@@ -99,9 +99,11 @@ function useDownloadManager() {
       .then((res) => {
         console.log('Received Response:', res)
         if (res.status === 200) {
-          let song = res.data
-          console.log('Opened Song:', song)
-          queue(song)
+          let songs = res.data
+          for(const song of songs){
+            console.log('Opened Song:', song)
+            queue(song)
+          }
         } else {
           console.log('Error:', res)
         }

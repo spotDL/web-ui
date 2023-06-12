@@ -36,6 +36,7 @@ export default {
   setup() {
     const sm = useSearchManager()
     const dm = useDownloadManager()
+    let loading = false
 
     const placeHolderOptions = [
       'All Eyes On Me - Bo Burnham',
@@ -80,7 +81,7 @@ export default {
       searchTerm: sm.searchTerm,
       isValidURL: sm.isValidURL,
       placeHolder,
-      loading: false
+      loading
     }
   },
 }

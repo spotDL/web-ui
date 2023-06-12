@@ -7,7 +7,10 @@
       v-model="searchTerm"
       @keyup.enter="lookUp(searchTerm)"
     />
-    <button class="btn btn-square btn-primary" @click="lookUp(searchTerm)">
+    <button v-if="loading" class="btn btn-sm btn-ghost loading">
+        LOADING
+      </button>
+    <button v-else="loading" class="btn btn-square btn-primary" @click="lookUp(searchTerm)">
       <!-- zero-width space - this btn class style breaks with only a svg inside -->
       &#8203;
       <Icon
@@ -56,6 +59,7 @@ export default {
     })
 
     function lookUp(query) {
+      loading = true
       if (sm.isValidURL(query)) {
         dm.fromURL(query)
         goto({ name: 'Download' })
@@ -65,6 +69,7 @@ export default {
       } else {
         console.log('Invalid search term.')
       }
+      loading = false
     }
 
     function goto(dest) {
@@ -75,6 +80,7 @@ export default {
       searchTerm: sm.searchTerm,
       isValidURL: sm.isValidURL,
       placeHolder,
+      loading: false
     }
   },
 }

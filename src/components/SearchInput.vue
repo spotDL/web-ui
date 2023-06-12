@@ -7,10 +7,10 @@
       v-model="searchTerm"
       @keyup.enter="lookUp(searchTerm)"
     />
-    <button v-if="loading" class="btn btn-sm btn-ghost loading">
-        LOADING
+    <button v-if="loading" class="btn btn-square btn-primary loading">
+
       </button>
-    <button v-else="loading" class="btn btn-square btn-primary" @click="lookUp(searchTerm)">
+    <button v-else class="btn btn-square btn-primary" @click="lookUp(searchTerm)">
       <!-- zero-width space - this btn class style breaks with only a svg inside -->
       &#8203;
       <Icon
@@ -36,7 +36,7 @@ export default {
   setup() {
     const sm = useSearchManager()
     const dm = useDownloadManager()
-    let loading = false
+    const loading = ref(false)
 
     const placeHolderOptions = [
       'All Eyes On Me - Bo Burnham',
@@ -60,7 +60,7 @@ export default {
     })
 
     function lookUp(query) {
-      loading = true
+      loading.value = true
       if (sm.isValidURL(query)) {
         dm.fromURL(query)
         goto({ name: 'Download' })
@@ -70,7 +70,7 @@ export default {
       } else {
         console.log('Invalid search term.')
       }
-      loading = false
+      loading.value = false  
     }
 
     function goto(dest) {

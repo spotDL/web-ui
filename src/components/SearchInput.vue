@@ -62,7 +62,9 @@ export default {
     function lookUp(query) {
       loading.value = true
       if (sm.isValidURL(query)) {
-        dm.fromURL(query)
+        dm.fromURL(query).then(() => {
+          loading.value = false
+        })
         goto({ name: 'Download' })
       } else if (sm.isValidSearch(query)) {
         let dest = { name: 'Search', params: { query: query } }
@@ -70,7 +72,6 @@ export default {
       } else {
         console.log('Invalid search term.')
       }
-      loading.value = false  
     }
 
     function goto(dest) {

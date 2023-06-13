@@ -95,7 +95,7 @@ API.ws_onerror((event) => {
 
 function useDownloadManager() {
   function fromURL(url) {
-    API.open(url)
+    return API.open(url)
       .then((res) => {
         console.log('Received Response:', res)
         if (res.status === 200) {

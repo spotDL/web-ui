@@ -29,7 +29,7 @@ function search(query) {
 }
 
 function open(songURL) {
-  return API.get('/api/song/url', { params: { url: songURL } })
+  return API.get('/api/url', { params: { url: songURL } })
 }
 
 function download(songURL) {

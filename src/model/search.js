@@ -15,8 +15,6 @@ function useSearchManager() {
   function isValidSearch(str) {
     if (
       str === '' ||
-      //str.includes('://open.spotify.com/playlist/') ||
-      str.includes('://open.spotify.com/album/') ||
       str.includes('://open.spotify.com/show/') ||
       str.includes('://open.spotify.com/artist/')
     ) {
@@ -26,6 +24,7 @@ function useSearchManager() {
   }
   function isValidURL(str) {
     if (str.includes('://open.spotify.com/track/') ||
+      str.includes('://open.spotify.com/album/') ||
       str.includes('://open.spotify.com/playlist/')
     ) {
       return true

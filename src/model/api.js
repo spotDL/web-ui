@@ -67,7 +67,7 @@ function search(query) {
 
 function open(songURL) {
   //4.2
-  if (localStorage.getItem("version") >= 4002000000) {
+  if (localStorage.getItem("version") >= 4001012000) {
     return API.get('/api/url', { params: { url: songURL } })
   } else {
     return API.get('/api/song/url', { params: { url: songURL } })

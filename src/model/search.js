@@ -30,7 +30,7 @@ function useSearchManager() {
       str.includes('://open.spotify.com/album/') ||
       str.includes('://open.spotify.com/playlist/') ||
       str.includes('://open.spotify.com/artist/')) &&
-      localStorage.getItem("version") >= 4002000000
+      localStorage.getItem("version") >= 4001012000
     ) {
       return true
     } else if(

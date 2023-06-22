@@ -63,7 +63,7 @@
           </svg> 
           <span
             >NEW!: This interface now can download Song, Album, Artist and Playlist. <br />
-            <span v-if="version < 4002000000">This version is not compatible with lists, you need to download a new spotd version</span>
+            <span v-if="version < 4001012000">This version is not compatible with lists, you need to download a new spotd version</span>
           </span>
         </div>
       </div> 

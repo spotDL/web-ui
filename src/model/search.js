@@ -33,7 +33,7 @@ function useSearchManager() {
       str.includes('://open.spotify.com/album/') ||
       str.includes('://open.spotify.com/playlist/') ||
       str.includes('://open.spotify.com/artist/')) &&
-      version >= 4002000000
+      version.value >= 4002000000
     ) {
       return true
     } else if(

@@ -8,6 +8,9 @@ const results = ref()
 const isSearching = ref(false)
 const error = ref(false)
 const errorValue = ref('')
+const version = ref(0)
+
+api.getVersion().then(v => version.value = v)
 
 function useSearchManager() {
   function isValid(str) {
@@ -26,10 +29,15 @@ function useSearchManager() {
     return true
   }
   function isValidURL(str) {
-    if (str.includes('://open.spotify.com/track/') ||
+    if ((str.includes('://open.spotify.com/track/') ||
       str.includes('://open.spotify.com/album/') ||
       str.includes('://open.spotify.com/playlist/') ||
-      str.includes('://open.spotify.com/artist/')
+      str.includes('://open.spotify.com/artist/')) &&
+      version >= 4002000000
+    ) {
+      return true
+    } else if(
+      str.includes('://open.spotify.com/track/')
     ) {
       return true
     }
@@ -64,21 +72,17 @@ function useSearchManager() {
       })
   }
 
-  function getVersion() {
-    return api.getVersion();
-  }
-
   return {
     searchTerm,
     isSearching,
     results,
     error,
     errorValue,
+    version,
     searchFor,
     isValid,
     isValidSearch,
-    isValidURL,
-    getVersion
+    isValidURL
   }
 }
 

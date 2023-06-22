@@ -87,20 +87,10 @@ export default {
       newDarkAlias: 'spotdl-dark',
     })
     const sm = useSearchManager()
-    const version = ref(0)
-
-    function getVersion() {
-      sm.getVersion().then(v => version.value = v)
-    }
-    
-    onBeforeMount(() => {
-      getVersion()
-    })
 
     return { 
       themeMgr,
-      version,
-      getVersion
+      version: sm.version
     }
   },
 }

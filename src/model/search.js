@@ -8,9 +8,6 @@ const results = ref()
 const isSearching = ref(false)
 const error = ref(false)
 const errorValue = ref('')
-const version = ref(0)
-
-api.getVersion().then(v => version.value = v)
 
 function useSearchManager() {
   function isValid(str) {
@@ -33,7 +30,7 @@ function useSearchManager() {
       str.includes('://open.spotify.com/album/') ||
       str.includes('://open.spotify.com/playlist/') ||
       str.includes('://open.spotify.com/artist/')) &&
-      version.value >= 4002000000
+      localStorage.getItem("version") >= 4002000000
     ) {
       return true
     } else if(
@@ -78,7 +75,6 @@ function useSearchManager() {
     results,
     error,
     errorValue,
-    version,
     searchFor,
     isValid,
     isValidSearch,

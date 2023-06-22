@@ -77,7 +77,6 @@ import { Icon } from '@iconify/vue'
 import SearchInput from '../components/SearchInput.vue'
 
 import { useBinaryThemeManager } from '../model/theme'
-import { useSearchManager } from '../model/search'
 
 export default {
   components: { Icon, SearchInput },
@@ -86,11 +85,10 @@ export default {
       newLightAlias: 'spotdl-light',
       newDarkAlias: 'spotdl-dark',
     })
-    const sm = useSearchManager()
 
     return { 
       themeMgr,
-      version: sm.version
+      version: localStorage.getItem("version")
     }
   },
 }

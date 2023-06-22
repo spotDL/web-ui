@@ -14,7 +14,6 @@ const API = axios.create({
 const sessionID = uuidv4()
 console.log('session ID: ', sessionID)
 
-let version
 getVersion()
 
 const wsConnection = new WebSocket(
@@ -27,20 +26,23 @@ wsConnection.onopen = (event) => {
 }
 
 function getVersion() {
-  return new Promise((resolve, reject) => {
-    API.get("/api/version")
-      .then(res => {
-        console.log("Backend version: ", res.data)
-        version = versionToNumber(res.data)
-        console.log("Using numerical version: ", version)
-        resolve(version)
-      })
-      .catch(error => {
-        console.log("Error getting version, using 0")
-        version = 0
-        resolve(version)
-      })
-  })
+
+  API.get("/api/version")
+    .then(res => {
+      const prevItem = localStorage.getItem("version")
+      console.log("Backend version: ", res.data)
+      localStorage.setItem("version", versionToNumber(res.data))
+      console.log("Using numerical version: ", versionToNumber(res.data))
+      if(prevItem != versionToNumber(res.data)) {
+        location.reload()
+      }
+    })
+    .catch(error => {
+      console.error(error)
+      console.log("Error getting version, using 0")
+      localStorage.setItem("version", 0)
+    })
+
 }
 
 function versionToNumber(versionStr) {
@@ -65,7 +67,7 @@ function search(query) {
 
 function open(songURL) {
   //4.2
-  if (version >= 4002000000) {
+  if (localStorage.getItem("version") >= 4002000000) {
     return API.get('/api/url', { params: { url: songURL } })
   } else {
     return API.get('/api/song/url', { params: { url: songURL } })

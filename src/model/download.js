@@ -94,7 +94,9 @@ API.ws_onerror((event) => {
 })
 
 function useDownloadManager() {
+  const loading = ref(false)
   function fromURL(url) {
+    loading.value = true
     return API.open(url)
       .then((res) => {
         console.log('Received Response:', res)
@@ -116,6 +118,7 @@ function useDownloadManager() {
       .catch((err) => {
         console.log('Other Error:', err.message)
       })
+      .finally(() => {loading.value = false})
   }
 
   function download(song) {
@@ -156,6 +159,7 @@ function useDownloadManager() {
     download,
     queue,
     remove,
+    loading
   }
 }
 

@@ -18,8 +18,7 @@ let version
 getVersion()
 
 const wsConnection = new WebSocket(
-  `${config.WS_PROTOCOL}//${config.BACKEND}${
-    config.PORT !== '' ? ':' + config.PORT : ''
+  `${config.WS_PROTOCOL}//${config.BACKEND}${config.PORT !== '' ? ':' + config.PORT : ''
   }${config.BASEURL}/api/ws?client_id=${sessionID}`
 )
 
@@ -28,28 +27,33 @@ wsConnection.onopen = (event) => {
 }
 
 function getVersion() {
-  API.get("/api/version").then(res => {
-    console.log("Backend version: ", res.data)
-    version = versionToNumber(res.data)
-    console.log("Using numerical version: ", version)
-  })
-  .catch(error => {
-    console.log("Error getting version, using 0")
-    version = 0
+  return new Promise((resolve, reject) => {
+    API.get("/api/version")
+      .then(res => {
+        console.log("Backend version: ", res.data)
+        version = versionToNumber(res.data)
+        console.log("Using numerical version: ", version)
+        resolve(version)
+      })
+      .catch(error => {
+        console.log("Error getting version, using 0")
+        version = 0
+        resolve(version)
+      })
   })
 }
 
 function versionToNumber(versionStr) {
   /*
   *  This function converts a version in format w.x.y.z to a number.
-  *  Each position has it value * 1000 ^ (3-position)
+  *  Each position has its value * 1000 ^ (3-position)
   */
-  if(!versionStr) return 0
+  if (!versionStr) return 0
   const tokens = versionStr.split(".")
   let n = 0
   const tokensLengthOrFixed = tokens.length > 4 ? 4 : tokens.length
-  for(let i=0;i<tokensLengthOrFixed;i++) {
-    n += Number(tokens[i]) * Math.pow(1000, 3-i)
+  for (let i = 0; i < tokensLengthOrFixed; i++) {
+    n += Number(tokens[i]) * Math.pow(1000, 3 - i)
   }
 
   return n
@@ -61,12 +65,11 @@ function search(query) {
 
 function open(songURL) {
   //4.2
-  if(version >= 4002000000) {
+  if (version >= 4002000000) {
     return API.get('/api/url', { params: { url: songURL } })
   } else {
     return API.get('/api/song/url', { params: { url: songURL } })
   }
-  
 }
 
 function download(songURL) {
@@ -115,4 +118,5 @@ export default {
   check_for_update,
   ws_onmessage,
   ws_onerror,
+  getVersion
 }

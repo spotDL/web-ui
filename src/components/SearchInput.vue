@@ -36,7 +36,6 @@ export default {
   setup() {
     const sm = useSearchManager()
     const dm = useDownloadManager()
-    const loading = ref(false)
 
     const placeHolderOptions = [
       'All Eyes On Me - Bo Burnham',
@@ -60,11 +59,8 @@ export default {
     })
 
     function lookUp(query) {
-      loading.value = true
       if (sm.isValidURL(query)) {
-        dm.fromURL(query).then(() => {
-          loading.value = false
-        })
+        dm.fromURL(query)
         goto({ name: 'Download' })
       } else if (sm.isValidSearch(query)) {
         let dest = { name: 'Search', params: { query: query } }
@@ -82,7 +78,7 @@ export default {
       searchTerm: sm.searchTerm,
       isValidURL: sm.isValidURL,
       placeHolder,
-      loading
+      loading: dm.loading
     }
   },
 }

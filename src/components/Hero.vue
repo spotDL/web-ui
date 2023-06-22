@@ -46,7 +46,7 @@
       </div>
 
       <SearchInput />
-      <!--<div class="alert alert-info shadow-lg my-4">
+      <div class="alert alert-info shadow-lg my-4">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +61,12 @@
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
           </svg> 
-          <Icon
-            icon="clarity:info-circle-line"
-            class="swap-off fill-current h-6 w-6"
-          />
           <span
-            >This web interface currently downloads only songs. <br />
-            Album, Artist, Playlist and Show links will not work.</span
-          >
+            >NEW!: This interface now can download Song, Album, Artist and Playlist. <br />
+            <span v-if="version < 4002000000">This version is not compatible with lists, you need to download a new spotd version</span>
+          </span>
         </div>
-      </div> -->
+      </div> 
     </div>
   </div>
 </template>
@@ -81,6 +77,7 @@ import { Icon } from '@iconify/vue'
 import SearchInput from '../components/SearchInput.vue'
 
 import { useBinaryThemeManager } from '../model/theme'
+import { useSearchManager } from '../model/search'
 
 export default {
   components: { Icon, SearchInput },
@@ -89,8 +86,22 @@ export default {
       newLightAlias: 'spotdl-light',
       newDarkAlias: 'spotdl-dark',
     })
+    const sm = useSearchManager()
+    const version = ref(0)
 
-    return { themeMgr }
+    function getVersion() {
+      sm.getVersion().then(v => version.value = v)
+    }
+    
+    onBeforeMount(() => {
+      getVersion()
+    })
+
+    return { 
+      themeMgr,
+      version,
+      getVersion
+    }
   },
 }
 </script>

@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 
 import API from '/src/model/api'
+import api from './api'
 
 const searchTerm = ref('')
 const results = ref()
@@ -63,6 +64,10 @@ function useSearchManager() {
       })
   }
 
+  function getVersion() {
+    return api.getVersion();
+  }
+
   return {
     searchTerm,
     isSearching,
@@ -73,6 +78,7 @@ function useSearchManager() {
     isValid,
     isValidSearch,
     isValidURL,
+    getVersion
   }
 }
 

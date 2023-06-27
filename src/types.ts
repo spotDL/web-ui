@@ -5,3 +5,5 @@ export interface AppConfig {
   WS_PORT: string;
   WS_PROTOCOL: string;
 }
+
+export type Option<T> = T | null;

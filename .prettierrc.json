@@ -6,5 +6,6 @@
   "printWidth": 100,
   "trailingComma": "none",
   "vueIndentScriptAndStyle": true,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "endOfLine": "lf"
 }

@@ -6,4 +6,9 @@ export interface AppConfig {
   WS_PROTOCOL: string;
 }
 
+export interface Settings {
+  audio_providers: string[];
+  lyrics_providers: string[];
+}
+
 export type Option<T> = T | null;

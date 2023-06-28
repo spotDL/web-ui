@@ -28,12 +28,6 @@ watch(() => store.client_id, () => {
   useLocalStorage('set', LocalKeys.CLIENT_ID, store.client_id);
 }, { deep: true })
 
-// onMounted(async () => {
-//   console.log(await SongApi.download('https://open.spotify.com/track/5l6hpyTGBK0LAAxgPnqTQL', store.client_id));
-//   WSConnectionApi.onMessage((event: WebSocketEventMap['message']) => {
-//     console.log(event)
-//   })
-// })
 </script>
 
 <template>

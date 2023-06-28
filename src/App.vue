@@ -8,6 +8,8 @@ import { LocalKeys } from '@app/constants';
 import { watch } from 'vue';
 import { SettingsApi, SongApi, WSConnectionApi, } from '@app/api';
 
+import Main from "@app/components/main/Main.vue"
+
 const store = useAppStore();
 
 onMounted(() => {
@@ -31,6 +33,5 @@ watch(() => store.client_id, () => {
 </script>
 
 <template>
-  <main>
-  </main>
+  <Main />
 </template>

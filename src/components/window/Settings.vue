@@ -34,12 +34,11 @@ const settings: Array<Settings> = [
 </script>
 
 <template>
-    <Modal name="settings">
-        <h2 class="font-bold text-xl text-primary">Settings</h2>
+    <Modal name="settings" title="Settings">
         <div v-for="setting in settings" :key="setting.id" class="collapse collapse-plus">
             <input type="radio" name="providers" />
             <h3 class="font-bold text-md text-base-content collapse-title px-0">{{ setting.name }}</h3>
-            <div class="collapse-content px-0">
+            <div class="collapse-content px-2">
                 <div v-for="(option, index) in setting.options" :key="option.key"
                     class="flex label-text items-center py-2 space-x-4">
                     <input type="checkbox" :id="`setting-${setting.id}-${index}`" :name="`${setting.id}[]`"

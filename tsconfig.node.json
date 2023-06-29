@@ -4,6 +4,9 @@
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
-    "types": ["node"]
+    "target": "ESNext",
+    "types": ["node"],
+    "strict": true,
+    "useDefineForClassFields": true
   }
 }

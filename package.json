@@ -1,6 +1,6 @@
 {
   "name": "spotdl-web",
-  "version": "4.1.0",
+  "version": "4.1.11",
   "scripts": {
     "dev": "run-p devtools dev-only",
     "dev-only": "vite",

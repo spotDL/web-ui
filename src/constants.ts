@@ -1,3 +1,5 @@
+export const REPO_LINK = 'https://github.com/spotDL/spotify-downloader';
+
 enum AudioProvider {
   'YouTube' = 'youtube',
   'YouTube Music' = 'youtube-music',

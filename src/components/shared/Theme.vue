@@ -17,7 +17,7 @@ import PaintIcon from "@app/components/icons/PaintIcon.vue"
 
 <template>
   <div class="dropdown dropdown-end">
-    <button class="btn btn-ghost hidden md:inline-flex">
+    <button class="btn btn-ghost hidden md:inline-flex normal-case">
       <PaintIcon class="h-5 w-5" />
       Theme
       <ChevronDownIcon class="w-4 h-4" />
@@ -29,14 +29,14 @@ import PaintIcon from "@app/components/icons/PaintIcon.vue"
           <div :data-theme="theme" class="bg-base-100 text-base-content w-full cursor-pointer">
             <div class="grid grid-cols-5 grid-rows-3">
               <div class="col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3">
-                <CheckIcon :class="`w-4 h-4 ${!(store.theme === theme) && 'invisible'}`" />
-                <div class="flex-grow text-sm capitalize">{{ theme }}</div>
                 <div class="flex h-full flex-shrink-0 flex-wrap gap-1">
                   <div class="bg-primary w-2 rounded"></div>
                   <div class="bg-secondary w-2 rounded"></div>
                   <div class="bg-accent w-2 rounded"></div>
                   <div class="bg-neutral w-2 rounded"></div>
                 </div>
+                <div class="flex-grow text-sm capitalize ml-2">{{ theme }}</div>
+                <CheckIcon :class="`w-4 h-4 shrink-0 ${!(store.theme === theme) && 'invisible'}`" />
               </div>
             </div>
           </div>

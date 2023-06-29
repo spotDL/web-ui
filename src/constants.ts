@@ -29,5 +29,6 @@ export const Provider = {
 };
 
 export enum LocalKeys {
-  CLIENT_ID = 'CLIENT_ID'
+  CLIENT_ID = 'CLIENT_ID',
+  THEME = 'theme'
 }

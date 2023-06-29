@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia';
-import { v4 as uuidv4 } from 'uuid';
+import { useLocalStorage } from '@app/composables/useLocalStorage';
+import { LocalKeys } from '@app/constants';
 
 export const useAppStore = defineStore('store', {
   state: () => {
     return {
-      client_id: '' as string
+      client_id: <string>'',
+      theme: <string>useLocalStorage('get', LocalKeys.THEME) ?? 'forest'
     };
   }
 });

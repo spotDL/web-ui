@@ -8,6 +8,8 @@ import { LocalKeys } from '@app/constants';
 import { watch } from 'vue';
 import { SettingsApi, SongApi, WSConnectionApi, } from '@app/api';
 
+import Main from "@app/components/window/Main.vue"
+import Settings from "@app/components/window/Settings.vue"
 
 const store = useAppStore();
 
@@ -31,4 +33,11 @@ watch(() => store.client_id, () => {
 
 </script>
 
-<template></template>
+<template>
+  <teleport to="body">
+    <Settings />
+  </teleport>
+  <div class="p-2">
+    <Main />
+  </div>
+</template>

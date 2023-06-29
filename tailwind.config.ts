@@ -1,9 +1,17 @@
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts}'],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ['Arial', ...fontFamily.sans]
+      }
+    }
   },
-  plugins: [require('daisyui')]
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['forest']
+  }
 } satisfies Config;

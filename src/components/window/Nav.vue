@@ -19,8 +19,10 @@ import ThemeButton from "@app/components/shared/Theme.vue"
             <a class="btn btn-ghost normal-case text-2xl font-sans" href="/">
                 <div class="flex-none">
                     <img src="../../assets/spotdl.svg" alt="spotdl icon" width="28" height="28" />
-                </div>spot<span class="text-[#16ce57] -ml-2">DL
-                </span>
+                </div>
+                <div class="max-md:hidden">spot<span class="text-[#16ce57] -ml-2">DL
+                    </span>
+                </div>
             </a>
             <a target="_blank" rel="noopener noreferrer" :href="`${REPO_LINK}/releases/tag/v${appVersion}`"
                 class="ml-2 link link-hover text-xs font-mono">v{{
@@ -31,8 +33,8 @@ import ThemeButton from "@app/components/shared/Theme.vue"
             <label class="btn btn-ghost btn-square" for="main">
                 <CogIcon class="w-6 h-6" />
             </label>
-            <div class="divider divider-horizontal h-4 my-auto" />
-            <a class="btn btn-ghost btn-square" :href="DISCORD_LINK">
+            <div class="divider divider-horizontal h-4 my-auto max-md:hidden" />
+            <a class="btn btn-ghost btn-square max-md:hidden" :href="DISCORD_LINK">
                 <DiscordIcon class="w-5 h-5" />
             </a>
             <a class="btn btn-primary max-md:btn-square normal-case" :href="REPO_LINK">

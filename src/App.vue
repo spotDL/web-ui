@@ -18,7 +18,7 @@ onMounted(() => {
   themeChange(true);
   store.$patch({ client_id: useLocalStorage('get', LocalKeys.CLIENT_ID) ?? uuidv4() });
 
-  // WSConnectionApi.connect(store.client_id);
+  WSConnectionApi.connect(store.client_id);
 })
 
 watch(() => store.client_id, () => {

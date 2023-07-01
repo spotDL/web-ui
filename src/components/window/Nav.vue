@@ -20,7 +20,7 @@ import ThemeButton from "@app/components/shared/Theme.vue"
                 <div class="flex-none">
                     <img src="../../assets/spotdl.svg" alt="spotdl icon" width="28" height="28" />
                 </div>
-                <div class="max-md:hidden">spot<span class="text-[#16ce57] -ml-2">DL
+                <div class="max-md:hidden">spot<span class="text-[#16ce57]">DL
                     </span>
                 </div>
             </a>
@@ -34,10 +34,12 @@ import ThemeButton from "@app/components/shared/Theme.vue"
                 <CogIcon class="w-6 h-6" />
             </label>
             <div class="divider divider-horizontal h-4 my-auto max-md:hidden" />
-            <a class="btn btn-ghost btn-square max-md:hidden" :href="DISCORD_LINK">
+            <a target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-square max-md:hidden"
+                :href="DISCORD_LINK">
                 <DiscordIcon class="w-5 h-5" />
             </a>
-            <a class="btn btn-primary max-md:btn-square normal-case" :href="REPO_LINK">
+            <a target="_blank" rel="noopener noreferrer" class="btn btn-primary max-md:btn-square normal-case"
+                :href="REPO_LINK">
                 <GitHubIcon class="w-5 h-5" />
                 <span class="max-md:hidden">Star on GitHub</span>
             </a>

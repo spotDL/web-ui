@@ -68,7 +68,8 @@ console.log(useConfig)
           <input :value="useConfig" @change="useConfig = !useConfig" name="config-toggle" id="config-toggle"
             type="checkbox" class="toggle toggle-sm checked:toggle-primary" />
         </div>
-        <input v-if="useConfig" type="file" :class="`file-input w-full file-input-sm file-input-bordered`" />
+        <input v-if="useConfig" accept=".json" type="file"
+          :class="`file-input w-full file-input-sm file-input-bordered`" />
       </div>
       <div class="divider" />
       <!-- Providers -->

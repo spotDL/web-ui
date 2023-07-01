@@ -28,9 +28,6 @@ watch(() => store.client_id, () => {
 </script>
 
 <template>
-  <teleport to="body">
-    <Settings />
-  </teleport>
   <div class="p-2">
     <Main />
   </div>

@@ -15,7 +15,7 @@ import ThemeButton from "@app/components/shared/Theme.vue"
 <template>
     <div class="navbar px-4">
         <div class="flex-1">
-            <a class="btn btn-ghost normal-case text-2xl" href="/">
+            <a class="btn btn-ghost normal-case text-2xl font-sans" href="/">
                 <div class="flex-none">
                     <img src="../../assets/spotdl.svg" alt="spotdl icon" width="28" height="28" />
                 </div>spot<span class="text-[#16ce57] -ml-2">DL
@@ -27,9 +27,9 @@ import ThemeButton from "@app/components/shared/Theme.vue"
         </div>
         <div class="flex-none space-x-4">
             <ThemeButton />
-            <button type="button" onclick="settings.showModal()" class="btn btn-ghost btn-square">
+            <label class="btn btn-ghost btn-square" for="main">
                 <CogIcon class="w-6 h-6" />
-            </button>
+            </label>
             <a class="btn btn-primary max-md:btn-square normal-case" :href="REPO_LINK">
                 <GitHubIcon class="w-5 h-5" />
                 <span class="max-md:hidden">Star on GitHub</span>

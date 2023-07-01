@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { REPO_LINK } from "@app/constants"
+import { REPO_LINK, DISCORD_LINK } from "@app/constants"
 
 const appVersion = __APP_VERSION__;
 
@@ -8,6 +8,7 @@ const appVersion = __APP_VERSION__;
 
 <script lang="ts">
 import GitHubIcon from "@app/components/icons/GitHubIcon.vue"
+import DiscordIcon from "@app/components/icons/DiscordIcon.vue"
 import CogIcon from "@app/components/icons/CogIcon.vue"
 import ThemeButton from "@app/components/shared/Theme.vue"
 </script>
@@ -30,6 +31,10 @@ import ThemeButton from "@app/components/shared/Theme.vue"
             <label class="btn btn-ghost btn-square" for="main">
                 <CogIcon class="w-6 h-6" />
             </label>
+            <div class="divider divider-horizontal h-4 my-auto" />
+            <a class="btn btn-ghost btn-square" :href="DISCORD_LINK">
+                <DiscordIcon class="w-5 h-5" />
+            </a>
             <a class="btn btn-primary max-md:btn-square normal-case" :href="REPO_LINK">
                 <GitHubIcon class="w-5 h-5" />
                 <span class="max-md:hidden">Star on GitHub</span>

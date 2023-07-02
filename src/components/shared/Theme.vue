@@ -22,7 +22,7 @@ import PaintIcon from "@app/components/icons/PaintIcon.vue"
       Theme
       <ChevronDownIcon class="w-4 h-4" />
     </button>
-    <div class="dropdown-content bg-base-200 text-base-content w-56 rounded-box mt-2">
+    <div class="dropdown-content bg-base-300 text-base-content w-56 rounded-box mt-2">
       <div v-for="theme in  themes " class="grid grid-cols-1 p-2">
         <button @click="store.$patch({ theme })" class="outline-base-content overflow-hidden rounded-lg text-left"
           :data-set-theme="theme">

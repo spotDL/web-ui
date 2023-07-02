@@ -6,7 +6,8 @@ export const useAppStore = defineStore('store', {
   state: () => {
     return {
       client_id: <string>'',
-      theme: <string>useLocalStorage('get', LocalKeys.THEME) ?? 'forest'
+      theme: <string>useLocalStorage('get', LocalKeys.THEME) ?? 'forest',
+      searchAlterHidden: false
     };
   }
 });

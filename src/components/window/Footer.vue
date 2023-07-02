@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { DOCS_LINK, DISCORD_LINK, REPO_LINK } from "@app/constants"
+import GitHubIcon from "../icons/GitHubIcon.vue";
+import DiscordIcon from "../icons/DiscordIcon.vue";
 </script>
 
 <template>
-    <footer class="footer py-8 px-4 text-base-content">
+    <footer class="footer py-8 px-2 text-base-content">
         <div>
             <img src="../../assets/spotdl.svg" alt="spotdl icon" width="48" height="48" />
             <p>
@@ -20,9 +22,15 @@ import { DOCS_LINK, DISCORD_LINK, REPO_LINK } from "@app/constants"
                 :href="`${REPO_LINK}/issues/new/choose`">Report an Issue</a>
         </div>
         <div>
-            <h5 class="footer-title">Communities</h5>
-            <a target="_blank" rel="noopener noreferrer" class="link link-hover" :href="REPO_LINK">GitHub</a>
-            <a target="_blank" rel="noopener noreferrer" class="link link-hover" :href="DISCORD_LINK">Discord</a>
+            <h5 class="footer-title">Socials</h5>
+            <div class="grid grid-flow-col gap-4">
+                <a target="_blank" rel="noopener noreferrer" :href="REPO_LINK">
+                    <GitHubIcon class="w-5 h-5" />
+                </a>
+                <a target="_blank" rel="noopener noreferrer" :href="DISCORD_LINK">
+                    <DiscordIcon class="w-5 h-5" />
+                </a>
+            </div>
         </div>
     </footer>
 </template>

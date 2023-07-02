@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { enumToArray } from "@app/utils/arrays"
-import { Provider, FileFormat } from '@app/constants'
+import { Provider, FileFormat, Bitrate } from '@app/constants'
 
 import HelpIcon from "@app/components/icons/HelpIcon.vue"
 import { ref } from "vue";
+
+const bitrates = Bitrate;
 
 interface Settings {
   id?: string;
@@ -53,7 +55,7 @@ const togglers: Array<ToggleableSettings> = [
 ]
 
 const useConfig = ref<boolean>(false);
-console.log(useConfig)
+
 </script>
 
 <template>
@@ -89,6 +91,22 @@ console.log(useConfig)
             </div>
           </div>
         </div>
+        <!-- Bitrate  -->
+        <div class="collapse collapse-plus">
+          <input type="radio" name="settings" />
+          <h3 :class="`font-bold text-md text-base-content collapse-title px-0 ${useConfig && 'opacity-[0.2]'}`">Bitrate
+          </h3>
+          <div class="collapse-content px-2">
+            <div class="grid grid-cols-4 w-full">
+              <div v-for="bitrate in bitrates" :key="bitrate"
+                class="col-span-1 label-text items-center flex py-2 space-x-4">
+                <input :disabled="useConfig" type="radio" :id="`bitrate-${bitrate}`" name="bitrate" :value="bitrate"
+                  class="radio radio-sm checked:radio-primary" />
+                <label :for="`bitrate-${bitrate}`" :class="useConfig && 'opacity-[0.2]'">{{ bitrate }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- File Format -->
         <div class="collapse collapse-plus">
           <input type="radio" name="settings" />
@@ -97,8 +115,8 @@ console.log(useConfig)
           <div class="collapse-content px-2">
             <div v-for="option in formats.options" :key="option.value"
               class="flex label-text items-center py-2 space-x-4">
-              <input :disabled="useConfig" type="radio" :id="`format-${option.value}`" name="formats"
-                :value="option.value" class="radio radio-sm checked:radio-primary" />
+              <input :disabled="useConfig" type="radio" :id="`format-${option.value}`" name="format" :value="option.value"
+                class="radio radio-sm checked:radio-primary" />
               <label :for="`format-${option.value}`" :class="useConfig && 'opacity-[0.2]'">{{ option.key }}</label>
             </div>
           </div>

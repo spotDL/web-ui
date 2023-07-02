@@ -32,6 +32,37 @@ export const Provider = {
   Lyrics: LyricsProvider
 };
 
+export const Bitrate = [
+  'auto',
+  'disable',
+  '8k',
+  '16k',
+  '24k',
+  '32k',
+  '40k',
+  '48k',
+  '64k',
+  '80k',
+  '96k',
+  '112k',
+  '128k',
+  '160k',
+  '192k',
+  '224k',
+  '256k',
+  '320k',
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9'
+];
+
 export enum LocalKeys {
   CLIENT_ID = 'CLIENT_ID',
   THEME = 'theme'

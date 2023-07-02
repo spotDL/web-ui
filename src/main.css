@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollbar-thin {
+  @apply scrollbar-thumb-base-content/50;
+}
+
+body {
+  @apply scrollbar-thin select-none;
+}

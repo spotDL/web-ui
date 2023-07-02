@@ -14,7 +14,7 @@ import ThemeButton from "@app/components/shared/Theme.vue"
 </script>
 
 <template>
-    <div class="navbar px-4">
+    <div class="sticky z-10 top-0 bg-base-100 navbar px-4">
         <div class="flex-1">
             <a class="btn btn-ghost normal-case text-2xl font-sans" href="/">
                 <div class="flex-none">

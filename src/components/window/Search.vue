@@ -5,7 +5,7 @@ const store = useAppStore();
 </script>
 
 <template>
-    <section class="w-full h-full py-2">
+    <section class="w-full h-full">
         <!-- Warn banner -->
         <Alert type="info" :hide="store.searchAlterHidden" :action="() => store.$patch({ searchAlterHidden: true })">
             <template v-slot:message>
@@ -14,7 +14,7 @@ const store = useAppStore();
                 </p>
             </template>
         </Alert>
-        <div class="w-full max-w-md mt-4">
+        <div class="w-full max-w-md mt-2">
             <SearchInput />
         </div>
     </section>

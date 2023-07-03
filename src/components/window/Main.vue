@@ -14,7 +14,7 @@ import Downloads from './Downloads.vue';
       <main class="h-fit pt-2 flex">
         <div class="flex h-full w-full overflow-y-auto">
           <!-- Search -->
-          <div class="flex w-full md:max-w-[calc(100vw_-_33.5rem)] ml-2 h- min-h-[calc(100vh_-_64px_-_1rem)]">
+          <div class="flex w-full md:max-w-[calc(100vw_-_33.5rem)] ml-2 h-full min-h-[calc(100vh_-_64px_-_1rem)]">
             <div class="h-full w-full pl-2">
               <Search />
             </div>

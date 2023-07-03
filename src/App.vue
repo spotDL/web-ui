@@ -7,10 +7,7 @@ import { useAppStore } from '@app/store';
 import { useLocalStorage } from '@app/composables/useLocalStorage';
 import { LocalKeys } from '@app/constants';
 import { watch } from 'vue';
-import { SettingsApi, SongApi, WSConnectionApi, } from '@app/api';
-
-import Main from "@app/components/window/Main.vue"
-import Settings from "@app/components/window/Settings.vue"
+import { SettingsApi, SongApi, Socket, } from '@app/api';
 
 const store = useAppStore();
 
@@ -18,7 +15,7 @@ onMounted(() => {
   themeChange(true);
   store.$patch({ client_id: useLocalStorage('get', LocalKeys.CLIENT_ID) ?? uuidv4() });
 
-  // WSConnectionApi.connect(store.client_id);
+  // Socket.connect(store.client_id);
 })
 
 watch(() => store.client_id, () => {
@@ -27,6 +24,4 @@ watch(() => store.client_id, () => {
 
 </script>
 
-<template>
-  <Main />
-</template>
+<template></template>

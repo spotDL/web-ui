@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .scrollbar-thin {
-  @apply scrollbar-thumb-base-content/50;
+  @apply scrollbar-thumb-base-content/50 hover:scrollbar-thumb-base-content/75;
 }
 
 body {

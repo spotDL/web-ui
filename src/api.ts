@@ -94,4 +94,4 @@ class WSConnection {
 
 export const SongApi = new Song();
 export const SettingsApi = new Settings();
-export const WSConnectionApi = new WSConnection();
+export const Socket = new WSConnection();

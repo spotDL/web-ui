@@ -47,6 +47,9 @@ class Song extends Api {
 class Settings extends Api {
   get = async <T = any, D = any>(client_id: string): Promise<AxiosResponse<T, D>> =>
     await this.api.get('/api/settings', { params: { client_id } });
+  
+  getDefaults = async <T = any, D = any>(client_id: string): Promise<AxiosResponse<T, D>> =>
+    await this.api.get('/api/options_model');
 
   set = async <T = any, D = any>(
     settings: ISettings,

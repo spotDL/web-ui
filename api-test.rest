@@ -1,7 +1,0 @@
-### This file requires {Rest Client} extension installed in your VS Code. This functions like Postman.
-
-GET http://localhost:8800/api/options_model
-
-###
-
-GET http://localhost:8800/api/settings?client_id=7bff7e28-2e52-4128-b8fa-c6d692ca0948

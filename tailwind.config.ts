@@ -7,6 +7,9 @@ export default {
   theme: {
     extend: {}
   },
-  plugins: [daisyui, scrollbar]
+  plugins: [daisyui, scrollbar],
+  daisyui: {
+    themes: ['light', 'dark', 'forest', 'cupcake', 'cyberpunk']
+  }
 } satisfies Config;
 

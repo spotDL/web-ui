@@ -6,7 +6,7 @@ import { netconfig } from '@app/config';
 
 const { HOSTNAME, PORT, PROTOCOL, WS_PORT, WS_PROTOCOL } = netconfig;
 
-const spotDLBaseURL = `${PROTOCOL}//${HOSTNAME}:${PORT && ':' + PORT}`;
+const spotDLBaseURL = `${PROTOCOL}//${HOSTNAME}${PORT && ':' + PORT}`;
 const wsBaseURL = `${WS_PROTOCOL}//${HOSTNAME}${WS_PORT && ':' + WS_PORT}`;
 
 class SpotDLApi {
@@ -16,7 +16,7 @@ class SpotDLApi {
     this.api = <AxiosStatic>axios.create({ baseURL: spotDLBaseURL });
   }
 
-  getVersion = async (): Promise<AxiosResponse<any, string>> => await this.api.get('/api/version');
+  getVersion = async (): Promise<string> => (await this.api.get('/api/version')).data;
 }
 
 class WSConnection {
@@ -56,5 +56,5 @@ class WSConnection {
   };
 }
 
-export const Socket = new WSConnection();
-export const SpotDL = new SpotDLApi();
+export const socket = new WSConnection();
+export const spotdl = new SpotDLApi();

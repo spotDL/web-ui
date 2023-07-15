@@ -2,6 +2,15 @@
   import { GitHubIcon, DiscordIcon, QueueIcon } from '$lib/components/icons';
   import { REPO_LINK, DISCORD_LINK } from '@app/constants';
   import ThemeChanger from './decors/ThemeChanger.svelte';
+
+  import { spotdl } from '@app/api';
+  import { onMount } from 'svelte';
+
+  let spotDLVersion: string = '0.0.0';
+
+  onMount(async () => {
+    spotDLVersion = await spotdl.getVersion();
+  });
 </script>
 
 <div class="sticky z-10 top-0 bg-base-100 navbar px-2">
@@ -12,6 +21,11 @@
       </div>
       <div class="max-md:hidden">spot<span class="text-[#16cd57]">DL</span></div>
     </a>
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href={REPO_LINK}
+      class="ml-2 link link-hover text-xs font-mono">v{spotDLVersion}</a>
   </div>
   <div class="flex-none space-x-4">
     <ThemeChanger />

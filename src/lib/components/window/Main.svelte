@@ -11,7 +11,7 @@
       <div class="flex h-full w-full overflow-y-auto" />
     </main>
   </div>
-  <div slot="drawer">
+  <div slot="drawer" class="h-fit w-fit">
     <Queue />
   </div>
 </Drawer>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { GitHubIcon, DiscordIcon, PaintIcon, QueueIcon } from '$lib/components/icons';
+  import { GitHubIcon, DiscordIcon, QueueIcon } from '$lib/components/icons';
   import { REPO_LINK, DISCORD_LINK } from '@app/constants';
   import ThemeChanger from './decors/ThemeChanger.svelte';
 </script>

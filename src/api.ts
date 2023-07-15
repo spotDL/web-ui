@@ -1,10 +1,23 @@
+import axios, { type AxiosInstance, type AxiosResponse, type AxiosStatic } from 'axios';
+
 import type { Option } from '@app/types';
 import { createURLFrom } from '$lib/utils/url';
 import { netconfig } from '@app/config';
 
 const { HOSTNAME, PORT, PROTOCOL, WS_PORT, WS_PROTOCOL } = netconfig;
 
+const spotDLBaseURL = `${PROTOCOL}//${HOSTNAME}:${PORT && ':' + PORT}`;
 const wsBaseURL = `${WS_PROTOCOL}//${HOSTNAME}${WS_PORT && ':' + WS_PORT}`;
+
+class SpotDLApi {
+  protected api: AxiosInstance;
+
+  constructor() {
+    this.api = <AxiosStatic>axios.create({ baseURL: spotDLBaseURL });
+  }
+
+  getVersion = async (): Promise<AxiosResponse<any, string>> => await this.api.get('/api/version');
+}
 
 class WSConnection {
   private socket: Option<WebSocket>;
@@ -44,3 +57,4 @@ class WSConnection {
 }
 
 export const Socket = new WSConnection();
+export const SpotDL = new SpotDLApi();

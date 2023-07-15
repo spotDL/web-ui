@@ -12,4 +12,3 @@ export default {
     themes: ['light', 'dark', 'forest', 'cupcake', 'cyberpunk']
   }
 } satisfies Config;
-

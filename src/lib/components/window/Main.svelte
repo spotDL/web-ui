@@ -8,7 +8,7 @@
   <div slot="main">
     <Nav />
     <main class="flex h-fit pt-2">
-      <div class="flex h-full w-full overflow-y-auto">
+      <div class="flex h-full w-full overflow-y-auto px-2">
         <slot />
       </div>
     </main>

@@ -1,6 +1,7 @@
 export enum LocalKeys {
   CLIENT_ID = 'CLIENT_ID',
-  THEME = 'THEME'
+  THEME = 'THEME',
+  SEARCH_FILTER = 'SEARCH_FILTER'
 }
 
 export const REPO_LINK = 'https://github.com/spotDL/spotify-downloader';

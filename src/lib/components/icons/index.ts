@@ -4,5 +4,6 @@ import PaintIcon from './PaintIcon.svelte';
 import CheckIcon from './CheckIcon.svelte';
 import ChevronDownIcon from './ChevronDownIcon.svelte';
 import QueueIcon from './QueueIcon.svelte';
+import SearchIcon from './SearchIcon.svelte';
 
-export { DiscordIcon, GitHubIcon, PaintIcon, CheckIcon, ChevronDownIcon, QueueIcon };
+export { DiscordIcon, GitHubIcon, PaintIcon, CheckIcon, ChevronDownIcon, SearchIcon, QueueIcon };

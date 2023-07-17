@@ -13,9 +13,9 @@
   });
 </script>
 
-<div class="sticky z-10 top-0 bg-base-100 navbar px-2">
+<div class="navbar sticky top-0 z-10 bg-base-100 px-2">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-2xl" href="/">
+    <a class="btn btn-ghost text-2xl normal-case" href="/">
       <div class="flex-none">
         <img src="app_icon.svg" alt="app_icon" width="28" height="28" />
       </div>
@@ -25,27 +25,27 @@
       target="_blank"
       rel="noopener noreferrer"
       href={REPO_LINK}
-      class="ml-2 link link-hover text-xs font-mono">v{spotDLVersion}</a>
+      class="link-hover link ml-2 font-mono text-xs">v{spotDLVersion}</a>
   </div>
   <div class="flex-none space-x-4">
     <ThemeChanger />
-    <label for="main" class="btn btn-ghost btn-square">
-      <QueueIcon class="w-6 h-6" />
+    <label for="main" class="btn btn-square btn-ghost">
+      <QueueIcon class="h-6 w-6" />
     </label>
-    <div class="divider divider-horizontal h-4 my-auto max-md:hidden" />
+    <div class="divider divider-horizontal my-auto h-4 max-md:hidden" />
     <a
       target="_blank"
       rel="noopener noreferrer"
-      class="btn btn-ghost btn-square max-md:hidden"
+      class="btn btn-square btn-ghost max-md:hidden"
       href={DISCORD_LINK}>
-      <DiscordIcon class="w-5 h-5" />
+      <DiscordIcon class="h-5 w-5" />
     </a>
     <a
       target="_blank"
       rel="noopener noreferrer"
-      class="btn btn-primary max-md:btn-square normal-case"
+      class="btn btn-primary normal-case max-md:btn-square"
       href={REPO_LINK}>
-      <GitHubIcon class="w-5 h-5" />
+      <GitHubIcon class="h-5 w-5" />
       <span class="max-md:hidden">Star on GitHub</span>
     </a>
   </div>

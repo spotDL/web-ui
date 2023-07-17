@@ -1,2 +1,2 @@
 <div
-  class="bg-base-100 h-screen w-full max-w-lg px-6 py-4 overflow-y-auto scrollbar-thin relative" />
+  class="relative h-screen w-full max-w-lg overflow-y-auto bg-base-100 px-6 py-4 scrollbar-thin" />

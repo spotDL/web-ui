@@ -7,8 +7,10 @@
 <Drawer name="main">
   <div slot="main">
     <Nav />
-    <main class="h-fit pt-2 flex">
-      <div class="flex h-full w-full overflow-y-auto" />
+    <main class="flex h-fit pt-2">
+      <div class="flex h-full w-full overflow-y-auto">
+        <slot />
+      </div>
     </main>
   </div>
   <div slot="drawer">

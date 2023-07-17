@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance, type AxiosResponse, type AxiosStatic } from 'axios';
+import axios, { type AxiosInstance, type AxiosStatic } from 'axios';
 
 import type { Option } from '@app/types';
 import { createURLFrom } from '$lib/utils/url';

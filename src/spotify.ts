@@ -1,3 +1,7 @@
+import type { AxiosInstance, AxiosStatic } from 'axios';
+import axios from 'axios';
+import { createURLFrom } from './lib/utils/url';
+
 interface SpotifyError {
   error: {
     status: number;
@@ -80,9 +84,45 @@ interface Playlist {
   tracks: PagingObject<PlaylistTrackObject>;
 }
 
-interface SearchResults {
+export interface SearchResults {
   tracks?: PagingObject<Track>;
   artists?: PagingObject<Artist>;
   albums?: PagingObject<Album>;
   playlists?: PagingObject<Playlist>;
 }
+
+class SpotifyApi {
+  protected api: AxiosInstance;
+
+  constructor() {
+    this.api = <AxiosStatic>axios.create({
+      baseURL: 'https://api.spotify.com/v1'
+    });
+  }
+
+  search = async (q: string, access_token: string): Promise<SearchResults> => {
+    const { data } = await this.api.get(
+      createURLFrom('/search', { params: { q, type: 'track,artist,album,playlist' } }),
+      { headers: { Authorization: `Bearer ${access_token}` } }
+    );
+    return data;
+  };
+
+  generateAccessToken = async () =>
+    (
+      await axios.post(
+        'https://accounts.spotify.com/api/token',
+        { grant_type: 'client_credentials' },
+        {
+          headers: {
+            Authorization: `Basic ${btoa(
+              `${import.meta.env.SPOTDL_CLIENT_ID}:${import.meta.env.SPOTDL_CLIENT_SECRET}`
+            )}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+      )
+    ).data.access_token;
+}
+
+export const spotify = new SpotifyApi();

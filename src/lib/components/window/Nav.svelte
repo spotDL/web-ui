@@ -9,7 +9,7 @@
   let spotDLVersion: string = '0.0.0';
 
   onMount(async () => {
-    spotDLVersion = await spotdl.getVersion();
+    if (import.meta.env.PROD) spotDLVersion = await spotdl.getVersion();
   });
 </script>
 
@@ -19,7 +19,7 @@
       <div class="flex-none">
         <img src="app_icon.svg" alt="app_icon" width="28" height="28" />
       </div>
-      <div class="max-md:hidden">spot<span class="text-[#16cd57]">DL</span></div>
+      <div class="font-sans max-md:hidden">spot<span class="text-[#16cd57]">DL</span></div>
     </a>
     <a
       target="_blank"

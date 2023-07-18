@@ -28,7 +28,8 @@
       bind:value={$SEARCH_QUERY}
       type="text"
       placeholder="Search"
-      class="max input input-bordered w-full" />
+      class="max input input-bordered w-full bg-base-200"
+      required />
     <button type="submit" class="btn btn-square btn-primary ml-2">
       <SearchIcon class="h-5 w-5" />
     </button>

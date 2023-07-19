@@ -9,7 +9,7 @@
 </script>
 
 <div class="h-full w-full">
-  <div class="flex h-72 w-full items-end justify-start p-8">
+  <div class="flex h-52 w-full items-end justify-start p-8">
     <h1 class="text-8xl font-bold">{category.name}</h1>
   </div>
   <Section title={`Popular ${category.name} playlists`}>

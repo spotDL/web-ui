@@ -8,7 +8,7 @@
 </script>
 
 <div class="h-full w-full">
-  <div class="mx-auto flex h-72 w-full max-w-lg items-center justify-center">
+  <div class="mx-auto flex h-52 w-full max-w-lg items-center justify-center">
     <center class="my-auto">
       Press <kbd class="kbd">⌘ + k</kbd> to search.
     </center>

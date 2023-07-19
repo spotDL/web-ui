@@ -6,7 +6,7 @@
 
 <a
   href={`/playlists/${playlist.id}`}
-  class="group card h-full w-full bg-base-100/50 py-3 hover:bg-base-100">
+  class="group card h-full w-full bg-base-100/75 py-3 hover:bg-base-100">
   <figure class="px-3">
     <img src={playlist.images[0].url} alt={playlist.name} class="rounded-xl" />
   </figure>

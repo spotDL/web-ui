@@ -1,22 +1,43 @@
 {
-  "name": "spotdl-web",
-  "version": "4.1.0",
+  "name": "spotdl-web-ui",
+  "version": "4.2.1",
+  "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "axios": "^1.2.5",
-    "daisyui": "^2.49.0",
-    "uuid": "^9.0.0",
-    "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test": "vitest",
+    "lint": "prettier --plugin-search-dir . --check . && eslint .",
+    "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
-    "@iconify/vue": "^4.0.2",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "tailwindcss": "^3.2.4",
-    "vite": "^4.0.4"
+    "@sveltejs/adapter-static": "^2.0.2",
+    "@sveltejs/kit": "^1.22.3",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "autoprefixer": "^10.4.14",
+    "daisyui": "^3.2.1",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-svelte": "^2.32.2",
+    "postcss": "^8.4.26",
+    "prettier": "^2.8.8",
+    "prettier-plugin-svelte": "^2.10.1",
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "svelte": "^4.0.5",
+    "svelte-check": "^3.4.6",
+    "tailwind-scrollbar": "^3.0.4",
+    "tailwindcss": "^3.3.3",
+    "tslib": "^2.6.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.4",
+    "vitest": "^0.33.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "tinykeys": "^2.1.0"
   }
 }

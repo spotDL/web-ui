@@ -1,0 +1,4 @@
+GET http://localhost:8800/api/version
+
+###
+GET http://localhost:8800/api/songs/search?query=hello+adele

@@ -8,8 +8,4 @@ export const THEME = writable<string>(useLocalStorage('get', LocalKeys.THEME) ??
 
 export const SEARCH_QUERY = writable<string>('');
 
-export const SEARCH_FILTER = writable<string>(
-  useLocalStorage('get', LocalKeys.SEARCH_FILTER) ?? 'all'
-);
-
 export const SPOTIFY_ACCESS_TOKEN = writable<string>('');

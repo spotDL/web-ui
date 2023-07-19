@@ -13,11 +13,11 @@
   });
 </script>
 
-<div class="navbar sticky top-0 z-10 bg-base-100 px-2">
+<div class="navbar sticky top-0 z-[999] bg-base-100 px-2">
   <div class="flex-1">
     <a class="btn btn-ghost text-2xl normal-case" href="/">
       <div class="flex-none">
-        <img src="app_icon.svg" alt="app_icon" width="28" height="28" />
+        <img src="/app_icon.svg" alt="app_icon" width="28" height="28" />
       </div>
       <div class="font-sans max-md:hidden">spot<span class="text-[#16cd57]">DL</span></div>
     </a>

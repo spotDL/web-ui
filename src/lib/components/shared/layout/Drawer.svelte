@@ -4,7 +4,7 @@
 
 <div class="drawer drawer-end">
   <input id={name} type="checkbox" class="drawer-toggle cursor-default" />
-  <div class="drawer-content h-screen overscroll-y-none">
+  <div class="drawer-content h-screen w-screen overflow-y-scroll scrollbar-thin">
     <slot name="main" />
   </div>
   <div class="drawer-side z-20">

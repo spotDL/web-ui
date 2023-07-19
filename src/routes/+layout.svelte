@@ -3,14 +3,19 @@
   import Main from '$lib/components/window/Main.svelte';
   import { onMount } from 'svelte';
   import { spotify } from '@app/spotify';
+  import Cmdk from '@app/lib/components/window/decors/CMDK.svelte';
 
   onMount(async () => {
-    $SPOTIFY_ACCESS_TOKEN = await spotify.generateAccessToken();
+    const token = await spotify.generateAccessToken();
+    SPOTIFY_ACCESS_TOKEN.set(token);
   });
 </script>
 
-<div data-theme={$THEME}>
-  <Main>
-    <slot />
-  </Main>
-</div>
+{#if $THEME}
+  <div data-theme={$THEME}>
+    <Main>
+      <slot />
+    </Main>
+    <Cmdk />
+  </div>
+{/if}

@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[data-theme='forest'],
+[data-theme='dark'] {
+  @apply scrollbar-track-white/25 scrollbar-thumb-white;
+}
+
+[data-theme='cupcake'],
+[data-theme='light'] {
+  @apply scrollbar-track-black/25 scrollbar-thumb-black;
+}
+
+[data-theme='cyberpunk'] {
+  @apply scrollbar-track-base-300/25 scrollbar-thumb-base-300;
+}
+
+[data-theme='cupcake'],
+[data-theme='forest'] {
+  & .modal-box {
+    @apply rounded-full;
+  }
+}

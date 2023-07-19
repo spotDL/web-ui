@@ -1,11 +1,11 @@
-import type { AxiosInstance, AxiosStatic } from 'axios';
+import type { AxiosError, AxiosInstance, AxiosResponse, AxiosStatic } from 'axios';
 import axios from 'axios';
 import { createURLFrom } from './lib/utils/url';
 
-interface SpotifyError {
+export interface SpotifyError {
   error: {
     status: number;
-    message: number;
+    message: string;
   };
 }
 
@@ -19,7 +19,7 @@ interface ImageObject {
   width: number | null;
 }
 
-interface PagingObject<T> {
+export interface PagingObject<T> {
   items: T[];
   limit: number;
   next: string | null;
@@ -28,13 +28,13 @@ interface PagingObject<T> {
   total: number;
 }
 
-interface SimplifiedArtistObject {
+export interface SimplifiedArtistObject {
   external_urls: ExternalUrls;
   id: string;
   name: string;
 }
 
-interface SimplifiedTrackObject {
+export interface SimplifiedTrackObject {
   artists: SimplifiedArtistObject[];
   duration_ms: number;
   explicit: boolean;
@@ -44,33 +44,7 @@ interface SimplifiedTrackObject {
   track_number: number;
 }
 
-interface Track extends SimplifiedTrackObject {
-  artists: Artist[];
-  album: Album;
-}
-
-interface Artist extends SimplifiedArtistObject {
-  genres: Array<string>;
-  images: Array<ImageObject>;
-}
-
-interface Album {
-  total_tracks: number;
-  id: string;
-  images: ImageObject[];
-  genres: string[];
-  artists: SimplifiedArtistObject[];
-  name: string;
-  tracks?: PagingObject<SimplifiedTrackObject>;
-  external_urls: ExternalUrls;
-}
-
-interface PlaylistTrackObject {
-  added_at: string | null;
-  track: Track;
-}
-
-interface Playlist {
+export interface SimplifiedPlaylistObject {
   description: string | null;
   external_urls: ExternalUrls;
   id: string;
@@ -81,7 +55,39 @@ interface Playlist {
     id: string;
     display_name: string | null;
   };
+  tracks: {
+    total: number;
+  };
+}
+
+export interface Playlist extends SimplifiedPlaylistObject {
   tracks: PagingObject<PlaylistTrackObject>;
+}
+
+export interface Track extends SimplifiedTrackObject {
+  artists: Artist[];
+  album: Album;
+}
+
+export interface Artist extends SimplifiedArtistObject {
+  genres: Array<string>;
+  images: Array<ImageObject>;
+}
+
+export interface Album {
+  total_tracks: number;
+  id: string;
+  images: ImageObject[];
+  genres: string[];
+  artists: SimplifiedArtistObject[];
+  name: string;
+  tracks?: PagingObject<SimplifiedTrackObject>;
+  external_urls: ExternalUrls;
+}
+
+export interface PlaylistTrackObject {
+  added_at: string | null;
+  track: Track;
 }
 
 export interface SearchResults {
@@ -89,6 +95,26 @@ export interface SearchResults {
   artists?: PagingObject<Artist>;
   albums?: PagingObject<Album>;
   playlists?: PagingObject<Playlist>;
+}
+
+export interface CategoryItem {
+  id: string;
+  icons: [
+    {
+      height: number | null;
+      width: number | null;
+      url: string;
+    }
+  ];
+  name: string;
+}
+
+export interface Category {
+  categories: PagingObject<CategoryItem>;
+}
+
+export interface CategoryPlaylist {
+  playlists: PagingObject<SimplifiedPlaylistObject>;
 }
 
 class SpotifyApi {
@@ -100,15 +126,13 @@ class SpotifyApi {
     });
   }
 
-  search = async (q: string, access_token: string): Promise<SearchResults> => {
-    const { data } = await this.api.get(
-      createURLFrom('/search', { params: { q, type: 'track,artist,album,playlist' } }),
+  search = async (q: string, access_token: string): Promise<AxiosResponse<SearchResults, any>> =>
+    await this.api.get(
+      createURLFrom('/search', { params: { q, type: 'track,artist,album,playlist', limit: '20' } }),
       { headers: { Authorization: `Bearer ${access_token}` } }
     );
-    return data;
-  };
 
-  generateAccessToken = async () =>
+  generateAccessToken = async (): Promise<string> =>
     (
       await axios.post(
         'https://accounts.spotify.com/api/token',

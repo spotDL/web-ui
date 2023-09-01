@@ -14,9 +14,10 @@ const API = axios.create({
 const sessionID = uuidv4()
 console.log('session ID: ', sessionID)
 
+getVersion()
+
 const wsConnection = new WebSocket(
-  `${config.WS_PROTOCOL}//${config.BACKEND}${
-    config.PORT !== '' ? ':' + config.PORT : ''
+  `${config.WS_PROTOCOL}//${config.BACKEND}${config.PORT !== '' ? ':' + config.PORT : ''
   }${config.BASEURL}/api/ws?client_id=${sessionID}`
 )
 
@@ -24,12 +25,36 @@ wsConnection.onopen = (event) => {
   console.log('websocket connection opened', event)
 }
 
+function getVersion() {
+
+  API.get("/api/version")
+    .then(res => {
+      const prevItem = localStorage.getItem("version")
+      console.log("Backend version: ", res.data)
+      localStorage.setItem("version", res.data)
+      if(prevItem != res.data) {
+        location.reload()
+      }
+    })
+    .catch(error => {
+      console.error(error)
+      console.log("Error getting version, using 0")
+      localStorage.setItem("version", "0.0.0")
+    })
+
+}
+
 function search(query) {
   return API.get('/api/songs/search', { params: { query } })
 }
 
 function open(songURL) {
-  return API.get('/api/song/url', { params: { url: songURL } })
+  //4.2
+  if (localStorage.getItem("version") >= "4") {
+    return API.get('/api/url', { params: { url: songURL } })
+  } else {
+    return API.get('/api/song/url', { params: { url: songURL } })
+  }
 }
 
 function download(songURL) {
@@ -78,4 +103,5 @@ export default {
   check_for_update,
   ws_onmessage,
   ws_onerror,
+  getVersion
 }

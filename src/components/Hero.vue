@@ -48,7 +48,7 @@
       <SearchInput />
       <div class="alert alert-info shadow-lg my-4">
         <div>
-          <!-- <svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -60,17 +60,13 @@
               stroke-width="2"
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
-          </svg> -->
-          <Icon
-            icon="clarity:info-circle-line"
-            class="swap-off fill-current h-6 w-6"
-          />
+          </svg> 
           <span
-            >This web interface currently downloads only songs. <br />
-            Album, Artist, Playlist and Show links will not work.</span
-          >
+            >NEW!: This interface now can download Song, Album, Artist and Playlist. <br />
+            <span v-if="version < '4.2.1'">This version is not compatible with lists, you need to download a new spotDL version</span>
+          </span>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -90,7 +86,10 @@ export default {
       newDarkAlias: 'spotdl-dark',
     })
 
-    return { themeMgr }
+    return { 
+      themeMgr,
+      version: localStorage.getItem("version")
+    }
   },
 }
 </script>

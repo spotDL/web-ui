@@ -7,7 +7,10 @@
       v-model="searchTerm"
       @keyup.enter="lookUp(searchTerm)"
     />
-    <button class="btn btn-square btn-primary" @click="lookUp(searchTerm)">
+    <button v-if="loading" class="btn btn-square btn-primary loading">
+
+      </button>
+    <button v-else class="btn btn-square btn-primary" @click="lookUp(searchTerm)">
       <!-- zero-width space - this btn class style breaks with only a svg inside -->
       &#8203;
       <Icon
@@ -75,6 +78,7 @@ export default {
       searchTerm: sm.searchTerm,
       isValidURL: sm.isValidURL,
       placeHolder,
+      loading: dm.loading
     }
   },
 }

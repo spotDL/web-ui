@@ -94,14 +94,23 @@ API.ws_onerror((event) => {
 })
 
 function useDownloadManager() {
+  const loading = ref(false)
   function fromURL(url) {
-    API.open(url)
+    loading.value = true
+    return API.open(url)
       .then((res) => {
         console.log('Received Response:', res)
         if (res.status === 200) {
-          let song = res.data
-          console.log('Opened Song:', song)
-          queue(song)
+          const songs = res.data
+          if (Array.isArray(songs)) {
+            for (const song of songs) {
+              console.log('Opened Song:', song)
+              queue(song)
+            }
+          } else {
+            console.log('Opened Song:', songs)
+            queue(songs)
+          }
         } else {
           console.log('Error:', res)
         }
@@ -109,6 +118,7 @@ function useDownloadManager() {
       .catch((err) => {
         console.log('Other Error:', err.message)
       })
+      .finally(() => {loading.value = false})
   }
 
   function download(song) {
@@ -149,6 +159,7 @@ function useDownloadManager() {
     download,
     queue,
     remove,
+    loading
   }
 }
 

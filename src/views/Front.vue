@@ -12,13 +12,13 @@ export default {
   setup() {
     onMounted(() => {
       window.scroll(0, 0)
-      API.check_for_update().then((resp) => {
+      /*API.check_for_update().then((resp) => {
         if (Boolean(resp.data) === true) {
           alert("This version is no longer supported, please update https://github.com/spotDL/spotify-downloader")
           }
       }).catch((error) => {
         alert("This version is no longer supported, please update https://github.com/spotDL/spotify-downloader")
-      })
+      })*/
     })
     return {}
   },

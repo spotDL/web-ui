@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 
 import API from '/src/model/api'
+import api from './api'
 
 const searchTerm = ref('')
 const results = ref()
@@ -15,8 +16,8 @@ function useSearchManager() {
   function isValidSearch(str) {
     if (
       str === '' ||
-      str.includes('://open.spotify.com/playlist/') ||
       str.includes('://open.spotify.com/album/') ||
+      str.includes('://open.spotify.com/playlist/') ||
       str.includes('://open.spotify.com/show/') ||
       str.includes('://open.spotify.com/artist/')
     ) {
@@ -25,7 +26,16 @@ function useSearchManager() {
     return true
   }
   function isValidURL(str) {
-    if (str.includes('://open.spotify.com/track/')) {
+    if ((str.includes('://open.spotify.com/track/') ||
+      str.includes('://open.spotify.com/album/') ||
+      str.includes('://open.spotify.com/playlist/') ||
+      str.includes('://open.spotify.com/artist/')) &&
+      localStorage.getItem("version") >= 4001012000
+    ) {
+      return true
+    } else if(
+      str.includes('://open.spotify.com/track/')
+    ) {
       return true
     }
     return false
@@ -68,7 +78,7 @@ function useSearchManager() {
     searchFor,
     isValid,
     isValidSearch,
-    isValidURL,
+    isValidURL
   }
 }
 

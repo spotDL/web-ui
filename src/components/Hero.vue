@@ -16,21 +16,18 @@
         />
 
         <!-- sun icon -->
-        &#8203;
         <Icon
           icon="clarity:sun-line"
           class="swap-on fill-current h-8 w-8 m-4"
         />
 
         <!-- moon icon -->
-        &#8203;
         <Icon
           icon="clarity:moon-line"
           class="swap-off fill-current h-8 w-8 m-4"
         />
       </label>
       <label for="my-modal" class="btn btn-square modal-button m-2">
-        &#8203;
         <Icon icon="clarity:settings-line" class="h-6 w-6" />
       </label>
     </div>
@@ -46,7 +43,7 @@
       </div>
 
       <SearchInput />
-      <div class="alert alert-info shadow-lg my-4">
+      <div role="alert" class="alert alert-info shadow-lg my-4">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,13 +57,14 @@
               stroke-width="2"
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
-          </svg> 
-          <span
-            >NEW!: This interface now can download Song, Album, Artist and Playlist. <br />
-            <span v-if="version < '4.2.1'">This version is not compatible with lists, you need to download a new spotDL version</span>
+          </svg>
+          <span>
+            NEW!: This interface now can download Song, Album, Artist and
+            Playlist. <br />
+            <span v-if="version < '4.2.1'"> This version is n </span>
           </span>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </template>
@@ -86,9 +84,9 @@ export default {
       newDarkAlias: 'spotdl-dark',
     })
 
-    return { 
+    return {
       themeMgr,
-      version: localStorage.getItem("version")
+      version: localStorage.getItem('version'),
     }
   },
 }

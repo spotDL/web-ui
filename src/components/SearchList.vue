@@ -59,7 +59,7 @@
         <div class="card-actions absolute bottom-0 right-0 m-2">
           <a class="btn btn-ghost btn-square" :href="song.url" target="_blank">
             <!-- Spotify -->
-            &#8203;
+
             <Icon icon="clarity:link-line" class="h-6 w-6" />
           </a>
 
@@ -68,7 +68,7 @@
             class="btn btn-primary btn-square"
           >
             <!-- in queue -->
-            &#8203;
+
             <Icon icon="clarity:check-line" class="h-6 w-6" />
           </button>
           <button
@@ -77,7 +77,7 @@
             @click="download(song)"
           >
             <!-- download -->
-            &#8203;
+
             <Icon icon="clarity:download-line" class="h-6 w-6" />
           </button>
         </div>

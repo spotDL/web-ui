@@ -31,7 +31,6 @@
         </svg>
       </button> -->
       <label for="my-modal" class="btn btn-square modal-button mx-2">
-        &#8203;
         <Icon icon="clarity:settings-line" class="h-6 w-6" />
       </label>
       <div class="indicator">
@@ -47,7 +46,6 @@
           :class="route.name === 'Download' ? 'btn-primary' : 'btn-ghost'"
           @click="goto({ name: 'Download' })"
         >
-          &#8203;
           <Icon icon="clarity:download-cloud-line" class="h-6 w-6" />
         </a>
       </div>

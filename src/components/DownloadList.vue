@@ -59,7 +59,6 @@
               class="btn btn-error btn-outline btn-square"
               @click="dm.remove(downloadItem.song)"
             >
-              &#8203;
               <Icon icon="clarity:trash-line" class="h-6 w-6" />
             </button>
             <a
@@ -69,23 +68,15 @@
               @click="download(downloadItem.web_download_url)"
               download
             >
-              &#8203;
               <Icon icon="clarity:download-line" class="h-6 w-6" />
             </a>
             <button
               v-else-if="downloadItem.progress === 0"
               class="btn btn-square btn-ghost loading"
-            >
-              &#8203;
-            </button>
+            ></button>
             <div
               v-else
-              class="
-                radial-progress
-                bg-primary
-                text-primary-content
-                border-4 border-primary
-              "
+              class="radial-progress bg-primary text-primary-content border-4 border-primary"
               :style="`--value: ${downloadItem.progress}; --size: 2.5rem`"
             >
               {{ Math.round(downloadItem.progress) }}%

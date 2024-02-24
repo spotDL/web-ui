@@ -16,7 +16,7 @@ class DownloadItem {
     this.song = song
     this.web_status = STATUS.QUEUED
     this.progress = 0
-    this.message = null
+    this.message = ''
     this.web_download_url = null
   }
   setDownloading() {
@@ -50,7 +50,7 @@ class DownloadItem {
   }
 }
 
-function useProgressTracker() {
+export function useProgressTracker() {
   function _findIndex(song) {
     return downloadQueue.value.findIndex(
       (downloadItem) => downloadItem.song.song_id === song.song_id
@@ -69,6 +69,8 @@ function useProgressTracker() {
   }
 
   function getBySong(song) {
+    const idx = _findIndex(song)
+    if (idx === -1) return null
     return downloadQueue.value[_findIndex(song)]
   }
 
@@ -93,7 +95,7 @@ API.ws_onerror((event) => {
   console.log('websocket error:', event)
 })
 
-function useDownloadManager() {
+export function useDownloadManager() {
   const loading = ref(false)
   function fromURL(url) {
     loading.value = true
@@ -118,7 +120,9 @@ function useDownloadManager() {
       .catch((err) => {
         console.log('Other Error:', err.message)
       })
-      .finally(() => {loading.value = false})
+      .finally(() => {
+        loading.value = false
+      })
   }
 
   function download(song) {
@@ -159,8 +163,6 @@ function useDownloadManager() {
     download,
     queue,
     remove,
-    loading
+    loading,
   }
 }
-
-export { useDownloadManager, useProgressTracker }

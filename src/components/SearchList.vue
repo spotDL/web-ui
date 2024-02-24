@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen m-2">
-    <div v-if="loading || error" class="hero min-h-screen">
-      <button v-if="loading" class="btn btn-sm btn-ghost loading">
+    <div v-if="sm.isSearching.value || props.error" class="hero min-h-screen">
+      <button v-if="sm.isSearching" class="btn btn-sm btn-ghost loading">
         LOADING
       </button>
-      <div v-if="error" class="alert alert-error">
+      <div v-if="props.error" class="alert alert-error">
         <div class="flex-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -19,16 +19,17 @@
               d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
             ></path>
           </svg>
-          <label>Error: {{ errorValue }}</label>
+          <label>Error: {{ sm.errorValue }}</label>
         </div>
       </div>
     </div>
     <div
       v-else
-      v-for="(song, index) in data"
+      v-for="(song, index) in props.data"
       :key="index"
       class="card md:card-side card-bordered my-2 shadow-lg card-compact bg-base-100"
     >
+      <!-- {{ song }} -->
       <figure class="aspect-square md:max-h-fit">
         <img
           :src="song.cover_url"
@@ -78,7 +79,10 @@
           >
             <!-- download -->
 
-            <Icon icon="clarity:download-line" class="h-6 w-6" />
+            <!-- <Icon icon="clarity:download-line" class="h-6 w-6" /> -->
+            <!-- <Icon icon="clarity:clock-line" class="h-6 w-6" /> -->
+            <!-- <Icon icon="clarity:upload-cloud-line" class="h-6 w-6" /> -->
+            <Icon icon="clarity:floppy-line" class="h-6 w-6" />
           </button>
         </div>
       </div>
@@ -86,34 +90,23 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
 import { useSearchManager } from '../model/search'
 import { useProgressTracker, useDownloadManager } from '../model/download'
 
-export default {
-  components: {
-    Icon,
-  },
-  props: ['data', 'error'],
-  emits: ['download'],
-  setup(props, context) {
-    const sm = useSearchManager()
-    const pt = useProgressTracker()
-    const dm = useDownloadManager()
+const props = defineProps(['data', 'error'])
+console.log('props', props)
 
-    return {
-      data: props.data,
-      error: props.error,
-      errorValue: sm.errorValue,
-      loading: sm.isSearching,
-      download: (data) => context.emit('download', data),
-      dm,
-      pt,
-    }
-  },
+const emit = defineEmits(['download'])
+
+const sm = useSearchManager()
+const pt = useProgressTracker()
+const dm = useDownloadManager()
+
+function download(song) {
+  emit('download', song)
 }
 </script>
 

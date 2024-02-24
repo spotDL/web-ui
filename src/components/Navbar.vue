@@ -1,39 +1,53 @@
 <template>
-  <!-- <div class="" style="width: 100%"> -->
   <div
     class="navbar m-2 shadow-lg bg-neutral text-neutral-content rounded-box"
     style="width: auto !important"
   >
-    <button class="px-2 mx-2 navbar-start" @click="goto({ name: 'Home' })">
+    <!-- <button
+      class="px-2 mx-2 navbar-start"
+      @click="router.push({ name: 'Home' })"
+    >
       <div class="bg-cover bg-no-repeat bg-center">
         <img src="../assets/spotdl.svg" class="py-2 pr-2 w-10 center" />
       </div>
       <button class="text-lg font-bold">spotDL</button>
-    </button>
+    </button> -->
+    <div class="navbar-start">
+      <a
+        class="btn btn-ghost text-xl font-bold"
+        @click="router.push({ name: 'Home' })"
+      >
+        <img src="../assets/spotdl.svg" class="py-2 pr-2 w-10 center" />
+        spotDL
+      </a>
+    </div>
     <div class="hidden sm:flex px-2 mx-2 navbar-center w-96 space-x-4">
       <SearchInput class="w-full" />
     </div>
     <div class="navbar-end">
-      <!-- <button class="btn btn-square px-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button> -->
-      <label for="my-modal" class="btn btn-square modal-button mx-2">
+      <label class="btn btn-circle swap swap-rotate mx-2">
+        <input
+          type="checkbox"
+          @change="
+            themeMgr.setTheme(
+              ($event.target as HTMLInputElement)?.checked ? 'light' : 'dark'
+            )
+          "
+          :checked="themeMgr.currentTheme.value === 'dark' ? false : true"
+        />
+        <Icon
+          icon="clarity:sun-line"
+          class="swap-on fill-current h-8 w-8 m-4"
+        />
+        <Icon
+          icon="clarity:moon-line"
+          class="swap-off fill-current h-8 w-8 m-4"
+        />
+      </label>
+      <label for="my-modal" class="btn btn-circle modal-button mx-2">
         <Icon icon="clarity:settings-line" class="h-6 w-6" />
       </label>
-      <div class="indicator">
+      <div class="indicator mx-2">
         <div
           v-if="pt.downloadQueue.value.length > 0"
           class="indicator-item indicator-top indicator-end badge badge-secondary"
@@ -42,9 +56,16 @@
           {{ pt.downloadQueue.value.length }}
         </div>
         <a
-          class="btn btn-square"
+          class="btn btn-circle"
           :class="route.name === 'Download' ? 'btn-primary' : 'btn-ghost'"
-          @click="goto({ name: 'Download' })"
+          @click="
+            route.name === 'Download'
+              ? router.push({
+                  name: 'Search',
+                  params: { query: sm.searchTerm.value },
+                })
+              : router.push({ name: 'Download' })
+          "
         >
           <Icon icon="clarity:download-cloud-line" class="h-6 w-6" />
         </a>
@@ -54,35 +75,28 @@
   <div class="sm:hidden px-2 mx-2">
     <SearchInput class="w-full" />
   </div>
-  <!-- </div> -->
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
 import router from '../router'
 import { useRoute } from 'vue-router'
 
+import { useBinaryThemeManager } from '../model/theme'
 import { useProgressTracker, useDownloadManager } from '../model/download'
+import { useSearchManager } from '../model/search'
 
 import { Icon } from '@iconify/vue'
 import SearchInput from '../components/SearchInput.vue'
 
-export default {
-  components: {
-    Icon,
-    SearchInput,
-  },
-  setup() {
-    const pt = useProgressTracker()
-    const dm = useDownloadManager()
+const pt = useProgressTracker()
+const dm = useDownloadManager()
+const sm = useSearchManager()
+const route = useRoute()
 
-    const route = useRoute()
-    function goto(dest) {
-      router.push(dest)
-    }
-    return { goto, route, pt, dm }
-  },
-}
+const themeMgr = useBinaryThemeManager({
+  newLightAlias: 'spotdl-light',
+  newDarkAlias: 'spotdl-dark',
+})
 </script>
 
 <style scoped>

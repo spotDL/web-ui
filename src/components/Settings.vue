@@ -110,23 +110,10 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
-
+<script setup lang="ts">
 import { useSettingsManager } from '../model/settings'
 
-import { Icon } from '@iconify/vue'
-
-export default {
-  components: {
-    Icon,
-  },
-  setup() {
-    const sm = useSettingsManager()
-
-    return { sm }
-  },
-}
+const sm = useSettingsManager()
 </script>
 
 <style scoped></style>

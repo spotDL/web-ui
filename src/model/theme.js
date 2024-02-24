@@ -5,11 +5,11 @@ const currentTheme = ref('')
 const lightAlias = ref('light')
 const darkAlias = ref('dark')
 
-function useBinaryThemeManager({
+export function useBinaryThemeManager({
   useSystem = true,
   initialTheme = '',
-  newLightAlias = null,
-  newDarkAlias = null,
+  newLightAlias = '',
+  newDarkAlias = '',
 } = {}) {
   function setLightAlias(alias) {
     lightAlias.value = alias
@@ -67,5 +67,3 @@ function useBinaryThemeManager({
     switchTheme,
   }
 }
-
-export { useBinaryThemeManager }

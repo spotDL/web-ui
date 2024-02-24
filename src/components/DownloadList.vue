@@ -1,23 +1,22 @@
 <template>
   <div class="min-h-screen m-2">
+    <h1 class="m-4 text-xl">Queue</h1>
     <div v-if="pt.downloadQueue.value.length === 0">
-      <div class="alert shadow-lg">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="stroke-info flex-shrink-0 w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <span>No downloads are queued. Search for a song to begin.</span>
-        </div>
+      <div class="alert alert-error shadow-lg">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="stroke-current flex-shrink-0 w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <span>No downloads are queued. Search for a song to begin.</span>
       </div>
     </div>
     <div v-else>
@@ -88,33 +87,25 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
+<script setup>
 import { Icon } from '@iconify/vue'
 
 import { useProgressTracker, useDownloadManager } from '../model/download'
-export default {
-  components: {
-    Icon,
-  },
-  props: {
-    data: Object,
-  },
-  setup(props, context) {
-    const pt = useProgressTracker()
-    const dm = useDownloadManager()
 
-    function download(url) {
-      const a = document.createElement('a')
-      a.href = url
-      a.download = url.split('/').pop()
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-    }
+const props = defineProps({
+  data: Object,
+})
 
-    return { dm, pt, download }
-  },
+const pt = useProgressTracker()
+const dm = useDownloadManager()
+
+function download(url) {
+  const a = document.createElement('a')
+  a.href = url
+  a.download = url.split('/').pop()
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
 }
 </script>
 

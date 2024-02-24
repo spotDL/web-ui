@@ -38,15 +38,6 @@
   </footer>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
-
-export default {
-  components: {},
-  setup() {
-    return {}
-  },
-}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

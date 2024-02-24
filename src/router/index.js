@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from 'vue-router'
 import Home from '/src/views/Front.vue'
 import Search from '/src/views/Search.vue'
 import Download from '/src/views/Download.vue'
-import config from '/src/config.js'
+import config from '/src/config'
 
 const routes = [
   {

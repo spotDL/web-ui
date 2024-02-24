@@ -2,7 +2,12 @@ import { ref, computed } from 'vue'
 
 import API from '/src/model/api'
 
-const settings = ref({ audio_providers: [''], lyrics_providers: [''] })
+const settings = ref({
+  audio_providers: [''],
+  lyrics_providers: [''],
+  format: '',
+  output: '',
+})
 
 const settingsOptions = {
   audio_providers: ['youtube', 'youtube-music'],
@@ -20,7 +25,7 @@ API.getSettings().then((res) => {
   }
 })
 
-function useSettingsManager() {
+export function useSettingsManager() {
   const isSaved = ref()
   function saveSettings() {
     console.log('Saving settings:', settings.value)
@@ -32,7 +37,7 @@ function useSettingsManager() {
           isSaved.value = null
         }, 2000)
       } else {
-        console.log('Error saving settings.', res)
+        console.error('Error saving settings.', res)
         isSaved.value = false
         setTimeout(() => {
           isSaved.value = null
@@ -42,5 +47,3 @@ function useSettingsManager() {
   }
   return { saveSettings, settings, settingsOptions, isSaved }
 }
-
-export { useSettingsManager }

@@ -1,7 +1,6 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 import API from '/src/model/api'
-import api from './api'
 
 const searchTerm = ref('')
 const results = ref()
@@ -26,16 +25,15 @@ function useSearchManager() {
     return true
   }
   function isValidURL(str) {
-    if ((str.includes('://open.spotify.com/track/') ||
-      str.includes('://open.spotify.com/album/') ||
-      str.includes('://open.spotify.com/playlist/') ||
-      str.includes('://open.spotify.com/artist/')) &&
-      localStorage.getItem("version") >= "4.2.1"
+    if (
+      (str.includes('://open.spotify.com/track/') ||
+        str.includes('://open.spotify.com/album/') ||
+        str.includes('://open.spotify.com/playlist/') ||
+        str.includes('://open.spotify.com/artist/')) &&
+      localStorage.getItem('version') >= '4.2.1'
     ) {
       return true
-    } else if(
-      str.includes('://open.spotify.com/track/')
-    ) {
+    } else if (str.includes('://open.spotify.com/track/')) {
       return true
     }
     return false
@@ -50,19 +48,19 @@ function useSearchManager() {
     errorValue.value = ''
     API.search(query)
       .then((res) => {
-        console.log('Received Data:', res.data)
+        console.log('Received Search Data:', res.data)
         if (res.status === 200) {
           results.value = res.data
           isSearching.value = false
         } else {
-          console.log('Error:', res)
+          console.error('Error Searching:', res)
           isSearching.value = false
           error.value = true
           errorValue.value = res.toString()
         }
       })
       .catch((err) => {
-        console.log('Other Error:', err.message)
+        console.error('Other Error Searching:', err.message)
         isSearching.value = false
         error.value = true
         errorValue.value = err.message
@@ -78,7 +76,7 @@ function useSearchManager() {
     searchFor,
     isValid,
     isValidSearch,
-    isValidURL
+    isValidURL,
   }
 }
 

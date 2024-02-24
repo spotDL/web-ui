@@ -3,7 +3,7 @@
     class="navbar m-2 shadow-lg bg-neutral text-neutral-content rounded-box"
     style="width: auto !important"
   >
-    <!-- <button
+    <button
       class="px-2 mx-2 navbar-start"
       @click="router.push({ name: 'Home' })"
     >
@@ -11,8 +11,8 @@
         <img src="../assets/spotdl.svg" class="py-2 pr-2 w-10 center" />
       </div>
       <button class="text-lg font-bold">spotDL</button>
-    </button> -->
-    <div class="navbar-start">
+    </button>
+    <!-- <div class="navbar-start">
       <a
         class="btn btn-ghost text-xl font-bold"
         @click="router.push({ name: 'Home' })"
@@ -20,7 +20,7 @@
         <img src="../assets/spotdl.svg" class="py-2 pr-2 w-10 center" />
         spotDL
       </a>
-    </div>
+    </div> -->
     <div class="hidden sm:flex px-2 mx-2 navbar-center w-96 space-x-4">
       <SearchInput class="w-full" />
     </div>

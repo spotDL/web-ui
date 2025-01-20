@@ -8,6 +8,8 @@ const isSearching = ref(false)
 const error = ref(false)
 const errorValue = ref('')
 
+const validURLRegex = /^https?:\/\/open\.spotify\.com(?:\/[a-zA-Z-]+)?\/(album|track|playlist|artist)\/[a-zA-Z0-9]+/;
+
 function useSearchManager() {
   function isValid(str) {
     return isValidSearch(str) || isValidURL(str)
@@ -20,6 +22,8 @@ function useSearchManager() {
       str.includes('://open.spotify.com/show/') ||
       str.includes('://open.spotify.com/artist/')
     ) {
+      return false
+    } else if (validURLRegex.test(str)) {
       return false
     }
     return true
@@ -34,6 +38,8 @@ function useSearchManager() {
     ) {
       return true
     } else if (str.includes('://open.spotify.com/track/')) {
+      return true
+    } else if (validURLRegex.test(str)) {
       return true
     }
     return false
